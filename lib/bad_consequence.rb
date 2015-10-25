@@ -26,5 +26,7 @@ class BadConsequence
     new(aText,0,0,0,nil,nil,true)
   end
   
+  private_class_method:new ##FIXME Esto va aqui o delante de todos los def de los metodos new*?
+  
   
 end
