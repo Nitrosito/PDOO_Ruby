@@ -3,11 +3,11 @@
 # and open the template in the editor.
 
 class Monster
-  def initialize(name, combatLevel, prize, badconsecuence )
+  def initialize(name, combatLevel, prize, badConsecuence )
     @name = name
     @combatLevel = combatLevel
     @prize = prize
-    @badconsecuence = badconsecuence
+    @badconsecuence = badConsecuence
   end
   
   attr_accessor :name, :combatLevel
