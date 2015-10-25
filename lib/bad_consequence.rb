@@ -32,7 +32,7 @@ class BadConsequence
   
   def to_s
     "
-         Nombre: #{@aText}
+         Nombre: #{@text}
          Niveles: #{@levels}
          N Tesoros Visibles: #{@nVisibleTreasures}
          N Tesoros Ocultos: #{@nHiddenTreasures}
