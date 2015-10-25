@@ -12,13 +12,13 @@ class Monster
     @badconsequence = badConsequence
   end
   
-  attr_accessor :name, :combatLevel
+  attr_accessor :name, :combatLevel 
   
   def to_s
-    "Nombre Monstruo: #{name} \n
-           Nivel Combate: #{combatLevel}\n
-           Buen Rollo: #{prize.to_s}\n
-           Mal rollo: #{badconsequence.to_s}" 
+    "Nombre Monstruo: #{@name} \n
+           Nivel Combate: #{@combatLevel}\n
+           Buen Rollo: #{@prize.to_s}\n
+           Mal rollo: #{@badconsequence.to_s}" 
   end
 end
 
