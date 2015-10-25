@@ -31,13 +31,14 @@ class BadConsequence
   private_class_method:new ##FIXME Esto va aqui o delante de todos los def de los metodos new*?
   
   def to_s
-    "Nombre: #{@aText}\n
-       Niveles: #{@levels}\n
-       N Tesoros Visibles: #{@nVisibleTreasures}\n
-       N Tesoros Ocultos: #{@nHiddenTreasures}\n
-       Tesoros Visibles Especificos #{@specificVisibleTreasures}\n
-       Tesoros Ocultos Especificos #{@specificHiddenTreasures}\n
-       Muerte: #{@death}"
+    "Mal Rollo
+        Nombre: #{@aText}
+        Niveles: #{@levels}
+         N Tesoros Visibles: #{@nVisibleTreasures}
+         N Tesoros Ocultos: #{@nHiddenTreasures}
+         Tesoros Visibles Especificos #{@specificVisibleTreasures}
+        Tesoros Ocultos Especificos #{@specificHiddenTreasures}
+        Muerte: #{@death}\n"
   end
   
   
