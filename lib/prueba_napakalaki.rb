@@ -13,8 +13,10 @@ class PruebaNapakalaki
 end
 
   # Probando a crear objetos de las clases creadas y consultarlos
-  mimonstruo = Monster.new("Tux", 100, Prize.new(10, 10), BadConsequence.new("meh",3,3,3,3,3,false)) # Creo objeto monstruo
-  puts mimonstruo.name #nombre
-  puts mimonstruo.combatLevel #Nivel
-  
+   #mimonstruo = Monster.new("Tux", 100, Prize.new(10, 10), BadConsequence.new("meh",3,3,3,3,3,false)) # Creo objeto monstruo
+   #puts mimonstruo.name #nombre
+   #puts mimonstruo.combatLevel #Nivel
 
+   #miprize = Prize.new(3, 3)
+   #puts miprize.level 
+   #puts miprize.treasures
