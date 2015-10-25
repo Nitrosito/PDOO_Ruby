@@ -8,10 +8,12 @@ class BadConsequence
     @levels = someLevels
     @nVisibleTreasures = someVisibleTreasures
     @nHiddenTreasures = someHiddenTreasures
+    @specificVisibleTreasures = someSpecificVisibleTreasures
+    @specificHiddenTreasures = someSpecificHiddenTreasures
     @death = death
   end
   
-    attr_accessor :text, :levels, :nVisibletreasures, :nHiddenTreasures, :death
+    attr_accessor :text, :levels, :nVisibletreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures
 
   
   def self.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
