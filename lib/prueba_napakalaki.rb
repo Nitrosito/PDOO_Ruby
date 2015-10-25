@@ -20,3 +20,10 @@ end
    #miprize = Prize.new(3, 3)
    #puts miprize.level 
    #puts miprize.treasures
+   
+#Creando un monstruo #FIXME #TODO
+ pChibithulhu = Prize.new(1,1)
+ bcChibithulhu = BadConsequence.newLevelSpecificTreasures("Embobados con el lindo primigenio te descartas de tu casco visible", 0,[TreasureKind::BOTHHANDS], nil)
+ mimonstruo = Monster.new('Chibithulhu',2,pChibithulhu,bcChibithulhu)
+ 
+puts mimonstruo.to_s
