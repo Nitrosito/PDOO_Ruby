@@ -20,7 +20,7 @@ class BadConsequence
     new(aText,someLevels,someVisibleTreasures,someHiddenTreasures,nil,nil,false)
   end
   
-  def self.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someHiddenTreasures)
+  def self.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
     new(aText,someLevels,0,0,someSpecificVisibleTreasures,someSpecificHiddenTreasures,false)
   end
   
@@ -29,6 +29,16 @@ class BadConsequence
   end
   
   private_class_method:new ##FIXME Esto va aqui o delante de todos los def de los metodos new*?
+  
+  def to_s
+    "Nombre: #{@aText}\n
+       Niveles: #{@levels}\n
+       N Tesoros Visibles: #{@nVisibleTreasures}\n
+       N Tesoros Ocultos: #{@nHiddenTreasures}\n
+       Tesoros Visibles Especificos #{@specificVisibleTreasures}\n
+       Tesoros Ocultos Especificos #{@specificHiddenTreasures}\n
+       Muerte: #{@death}"
+  end
   
   
 end
