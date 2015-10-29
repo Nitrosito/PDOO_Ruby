@@ -11,6 +11,6 @@ class Prize
   attr_accessor :treasures, :level
   
   def to_s
-    " Tesoros: #{@treasures} Nivel: #{@level}\n"
+    "\n         Tesoros: #{@treasures} \n         Nivel: #{@level}"
   end
 end

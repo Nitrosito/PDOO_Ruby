@@ -15,7 +15,7 @@ class Monster
   def to_s
     "Nombre Monstruo: #{@name} 
        Nivel Combate: #{@combatLevel}
-       \nBuen Rollo #{@prize.to_s}
+       Buen Rollo #{@prize.to_s}
        Mal rollo: #{@badconsequence.to_s}" 
   end
 end

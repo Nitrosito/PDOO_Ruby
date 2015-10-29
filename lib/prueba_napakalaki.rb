@@ -21,9 +21,18 @@ end
    #puts miprize.level 
    #puts miprize.treasures
    
-#Creando un monstruo #FIXME #TODO
- pChibithulhu = Prize.new(1,1)
- bcChibithulhu = BadConsequence.newLevelSpecificTreasures("Embobados con el lindo primigenio te descartas de tu casco visible", 0,[TreasureKind::BOTHHANDS], nil)
- mimonstruo = Monster.new('Chibithulhu',2,pChibithulhu,bcChibithulhu)
- 
-puts mimonstruo.to_s
+#Creando un monstruo PRUEBA
+# pChibithulhu = Prize.new(1,1)
+# bcChibithulhu = BadConsequence.newLevelSpecificTreasures("Embobados con el lindo primigenio te descartas de tu casco visible", 0,[TreasureKind::BOTHHANDS], nil)
+# mimonstruo = Monster.new('Chibithulhu',2,pChibithulhu,bcChibithulhu)
+# 
+#puts mimonstruo.to_s
+
+#Añadiendo monstruos del PDF
+monster = Array.new 
+price =Prize.new(4,2)
+badConsequence =
+  BadConsequence.newLevelNumberOfTreasures("Pierdes 5 niveles y 3 tesoros visibles",5,3,0)
+  monster << Monster.new("El rey de la rosa",13,price,badConsequence)
+  
+puts monster
