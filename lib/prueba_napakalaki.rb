@@ -42,45 +42,50 @@ caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta",0,
 [TreasureKind::ONEHAND],
 [TreasureKind::ONEHAND])
 prize = Prize.new(4,1);
-monster << Monster.new("Angeles de la noche ibicenca",14,price,badConsequence);
+monster << Monster.new("Angeles de la noche ibicenca",14,prize,badConsequence);
                     
                     
-#                // Byakhees de bonanza
-#            badConsequence = new BadConsequence("Pierdes tu armadura visible y otra oculta", 0,
-#                    new ArrayList(Arrays.asList(TreasureKind.ARMOR)),
-#                    new ArrayList(Arrays.asList(TreasureKind.ARMOR)));
-#            prize=new Prize(2, 1);
-#            monstruos.add(new Monster("Byakhess de bonanza", 8, badConsequence, prize));
-#            
-#            
-#                // Chibithulhu
-#            badConsequence = new BadConsequence("Embobados con el lindo primigenio te descartas de tu casco visible"
-#                ,0,new ArrayList(Arrays.asList(TreasureKind.HELMET)),new ArrayList());
-#            prize = new Prize(1, 1);
-#            monstruos.add(new Monster("Chibithulhu",2,badConsequence,prize));
-#            
-#            
-#                //El sopor de Dunwich
-#            badConsequence = new BadConsequence("El primordial bostezo contagioso.Pierdes el calzado visible"
-#                    , 0, new ArrayList(Arrays.asList(TreasureKind.SHOES)),new ArrayList());
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("El sopor de Dunwich",2,badConsequence,prize));
-#            
-#            
-#                //El gorron en el umbral
-#            badConsequence = new BadConsequence("Pierdes todos tus tesoros visibles",5,0,0);
-#            prize = new Prize(3,1);
-#            monstruos.add(new Monster("El gorron en el umbral",10,badConsequence,prize));
-#            
-#            
-#                //H.P. Munchraft
-#            badConsequence = new BadConsequence("Pierdes la armadura visible",0,
-#                    new ArrayList(Arrays.asList(TreasureKind.ARMOR)),new ArrayList());
-#            prize = new Prize(2,1);
-#            monstruos.add(new Monster("H.P. Munchraft",6,badConsequence,prize));
-#            
-#            
-#                //Bichgooth
+# Byakhees de bonanza
+badConsequence = 
+   BadConsequence.newLevelSpecificTreasures("Pierdes tu armadura visible y otra oculta", 0,
+   [TreasureKind::ONEHAND],
+   [TreasureKind::ONEHAND])
+   prize= Prize.new(2, 1)
+   monster << Monster.new("Byakhess de bonanza",8,prize,badConsequence)
+            
+
+#Chibithulhu
+badConsequence = 
+  BadConsequence.newLevelSpecificTreasures("Embobados con el lindo primigenio
+ te descartas de tu casco visible",0,[TreasureKind::HELMET],nil)
+prize = Prize.new(1, 1);
+monster << Monster.new("Chibithulhu",2,prize,badConsequence);
+
+            
+#El sopor de Dunwich
+badConsequence = 
+  BadConsequence.newLevelSpecificTreasures("El primordial bostezo contagioso.Pierdes el calzado visible",
+  0,[TreasureKind::SHOES],nil)
+  prize = Prize.new(1,1);
+  monster << Monster.new("El sopor de Dunwich",2,prize,badConsequence);
+            
+            
+#El gorron en el umbral
+  badConsequence =
+    badConsequence.newLevelNumberOfTreasures("Pierdes todos tus tesoros visibles",5,0,0);
+  prize = Prize.new(3,1);
+  monster << Monster.new("El gorron en el umbral",10,prize,badConsequence)
+            
+            
+#H.P. Munchraft
+badConsequence =
+  BadConsequence.newLevelSpecificTreasures("Pierdes la armadura visible",0,
+  [TreasureKind::ARMOR],nil)
+  prize = Prize.new(2,1);
+  monster << Monster.new("H.P. Munchraft",6,prize,badConsequence)
+  
+            
+#Bichgooth
 #            badConsequence = new BadConsequence("Sientes bichos bajo la ropa.Descarta la armadura visible",
 #            0, new ArrayList(Arrays.asList(TreasureKind.ARMOR)),new ArrayList());
 #            prize = new Prize(1,1);
