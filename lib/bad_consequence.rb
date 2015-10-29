@@ -36,8 +36,8 @@ class BadConsequence
          Niveles: #{@levels}
          N Tesoros Visibles: #{@nVisibleTreasures}
          N Tesoros Ocultos: #{@nHiddenTreasures}
-         Tesoros Visibles Especificos #{@specificVisibleTreasures}
-         Tesoros Ocultos Especificos #{@specificHiddenTreasures}
+         Tesoros Visibles Especificos: #{@specificVisibleTreasures}
+         Tesoros Ocultos Especificos: #{@specificHiddenTreasures}
          Muerte: #{@death}\n"
   end
   

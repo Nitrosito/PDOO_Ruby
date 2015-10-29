@@ -1,4 +1,4 @@
-  #encondig: utf-8
+  # encoding: UTF-8
   require_relative "prize.rb"
   require_relative "bad_consequence.rb"
   require_relative "monster.rb"
@@ -41,7 +41,7 @@ badConsequence =
 caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta",0,
 [TreasureKind::ONEHAND],
 [TreasureKind::ONEHAND])
-prize = Prize.new(4,1);
+prize = Prize.new(4,1)
 monster << Monster.new("Angeles de la noche ibicenca",14,prize,badConsequence);
                     
                     
@@ -58,7 +58,7 @@ badConsequence =
 badConsequence = 
   BadConsequence.newLevelSpecificTreasures("Embobados con el lindo primigenio
  te descartas de tu casco visible",0,[TreasureKind::HELMET],nil)
-prize = Prize.new(1, 1);
+prize = Prize.new(1, 1)
 monster << Monster.new("Chibithulhu",2,prize,badConsequence);
 
             
@@ -66,14 +66,14 @@ monster << Monster.new("Chibithulhu",2,prize,badConsequence);
 badConsequence = 
   BadConsequence.newLevelSpecificTreasures("El primordial bostezo contagioso.Pierdes el calzado visible",
   0,[TreasureKind::SHOES],nil)
-  prize = Prize.new(1,1);
+  prize = Prize.new(1,1)
   monster << Monster.new("El sopor de Dunwich",2,prize,badConsequence);
             
             
 #El gorron en el umbral
   badConsequence =
-    badConsequence.newLevelNumberOfTreasures("Pierdes todos tus tesoros visibles",5,0,0);
-  prize = Prize.new(3,1);
+    BadConsequence.newLevelNumberOfTreasures("Pierdes todos tus tesoros visibles",5,0,0);
+  prize = Prize.new(3,1)
   monster << Monster.new("El gorron en el umbral",10,prize,badConsequence)
             
             
@@ -81,76 +81,84 @@ badConsequence =
 badConsequence =
   BadConsequence.newLevelSpecificTreasures("Pierdes la armadura visible",0,
   [TreasureKind::ARMOR],nil)
-  prize = Prize.new(2,1);
+  prize = Prize.new(2,1)
   monster << Monster.new("H.P. Munchraft",6,prize,badConsequence)
   
             
 #Bichgooth
-#            badConsequence = new BadConsequence("Sientes bichos bajo la ropa.Descarta la armadura visible",
-#            0, new ArrayList(Arrays.asList(TreasureKind.ARMOR)),new ArrayList());
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("Bichgooth",2,badConsequence,prize));
-#            
-#            
-#                //La que redacta en las tinieblas
-#            badConsequence = new BadConsequence("Toses los pulmones y pierdes 2 niveles",2,0,0);
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("La que redacta en las tinieblas",2,badConsequence,prize));
-#            
-#                //Los hondos
-#            badConsequence = new BadConsequence("Estos monstruos resultan bastante superficiales  "
-#                + "y te aburren mortalmente",true);
-#            prize = new Prize(2,1);
-#            monstruos.add(new Monster("Los hondos", 8,badConsequence,prize));
-#            
-#                //Semillas Cthulhu
-#            badConsequence = new BadConsequence("Pierdes 2 niveles y 2 tesoros ocultos",2,0,2);
-#            prize = new Prize(2,1);
-#            monstruos.add(new Monster("Semillas Cthulhu",4,badConsequence,prize));
-#            
-#                //Dameargo
-#            badConsequence = new BadConsequence("Te intentas escaquear.Pierdes una mano visible"
-#                    ,0, new ArrayList(Arrays.asList(TreasureKind.ONEHAND)),new ArrayList());
-#            prize = new Prize(2,1);
-#            monstruos.add(new Monster("Dameargo",1,badConsequence,prize));
-#            
-#                //Pollipólipo volante
-#            badConsequence = new BadConsequence("Da mucho asquito. Pierdes 3 niveles",3,0,0);
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("Pollipólipo volante",3,badConsequence,prize));
-#            
-#                //Yskhtihyssg- Goth
-#            badConsequence = new BadConsequence("No le hace gracia que pronuncien mal su nombre. Estas muerto",true);
-#            prize = new Prize(3,1);
-#            monstruos.add(new Monster("Yskhtihyssg- Goth",12,badConsequence,prize));
-#            
-#                //Familia feliz
-#            badConsequence = new BadConsequence("La familia te atrapa. Est́as muerto",true);
-#            prize = new Prize(4,1);
-#            monstruos.add(new Monster("Familia feliz",1,badConsequence,prize));
-#            
-#                //Roboggoth
-#            badConsequence = new BadConsequence("La quinta directiva primaria te obliga a perder 2 niveles y un tesoro 2 manos visible"
-#            ,0,new ArrayList(Arrays.asList(TreasureKind.BOTHHANDS)),new ArrayList());
-#            prize = new Prize(2,1);
-#            monstruos.add(new Monster("Roboggoth",8,badConsequence,prize));
-#            
-#                //El espia
-#            badConsequence = new BadConsequence("Te asusta en la noche. Pierdes un casco visible",0
-#                    ,new ArrayList(Arrays.asList(TreasureKind.HELMET)),new ArrayList());
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("El espia",5,badConsequence,prize));
-#            
-#                //El Lenguas
-#            badConsequence = new BadConsequence("Menudo susto te llevas. Pierdes 2 niveles y 5 tesoros visibles"
-#                    ,2,5,0);
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("El Lenguas",20,badConsequence,prize));
-#            
-#                //Bicéfalo
-#             badConsequence = new BadConsequence("Te faltan manos para tanta cabeza. Pierdes" 
-#                     +"3 niveles y tus tesoros visibles de las manos",3,5,0);
-#            prize = new Prize(1,1);
-#            monstruos.add(new Monster("Bicéfalo",20,badConsequence,prize));
-#           
-puts monster
+badConsequence = 
+  BadConsequence.newLevelSpecificTreasures("Sientes bichos bajo la ropa. Descarta la armadura visible", 0,
+  [TreasureKind::ARMOR], nil)
+  prize = Prize.new(1,1)
+  monster << Monster.new("Bichogooth",2,prize,badConsequence)
+         
+#La que redacta en las tinieblas
+badConsequence =
+  BadConsequence.newLevelNumberOfTreasures("Toses los pulmones y pierdes 2 niveles", 2,0,0)
+  prize = Prize.new(1,1)
+  monster << Monster.new("La redacta de las tinieblas",2,prize,badConsequence)
+          
+#Los hondos
+badConsequence =
+  BadConsequence.newDeath("Estos monstruos resultan bastante superficiales y te aburren mortalmente")
+  prize = Prize.new(2,1)
+  monster << Monster.new("Los hondos",8,prize,badConsequence)
+            
+#Semillas Cthulhu
+badConsequence = 
+  BadConsequence.newLevelNumberOfTreasures("Pierdes 2 niveles y 2 tesoros ocultos",2,0,2)
+  prize = Prize.new(2,1)
+  monster << Monster.new("Semillas Cthulhu",4,prize,badConsequence)
+          
+#Dameargo
+badConsequence =
+  BadConsequence.newLevelSpecificTreasures("Te intentas escaquear. Pierdes una mano visible",0,
+  [TreasureKind::ONEHAND],nil)
+  prize = Prize.new(2,1)
+  monster << Monster.new("Dameargo",1,prize,badConsequence)
+            
+#Pollipólipo volante
+badConsequence = 
+  BadConsequence.newLevelNumberOfTreasures("Da mucho asquito. Pierdes 3 niveles",3,0,0)
+  prize = Prize.new(1,1)
+  monster << Monster.new("Pollipólipo volante",3,prize,badConsequence)
+           
+#Yskhtihyssg- Goth
+badConsequence = 
+  BadConsequence.newDeath("No le hace gracia que pronuncien mal su nombre. Estas muerto")
+  prize = Prize.new(3,1)
+  monster << Monster.new("Yskhtihyssg- Goth",12,prize,badConsequence)
+           
+#Familia feliz
+badConsequence =
+  BadConsequence.newDeath("La familia te atrapa")
+  prize = Prize.new(4,1)
+  monster << Monster.new("Familia feliz",1,prize,badConsequence)
+           
+#Roboggoth
+badConsequence = 
+  BadConsequence.newLevelSpecificTreasures("La quinta directiva primaria te obliga a perder 2 niveles y un tesoro 2 manos visible",0,
+  [TreasureKind::BOTHHANDS],nil)
+  prize = Prize.new(2,1)
+  monster << Monster.new("Roboggoth",8,prize,badConsequence)
+           
+#El espia
+badConsequence =
+  BadConsequence.newLevelSpecificTreasures("Te asusta en la noche. Pierdes un casco visible",0,
+  [TreasureKind::HELMET],nil)
+  prize = Prize.new(1,1)
+  monster << Monster.new("El espia",5,prize,badConsequence)
+           
+#El Lenguas
+badConsequence = 
+  BadConsequence.newLevelNumberOfTreasures("Menudo susto te llevas. Pierdes 2 niveles y 5 tesoros visibles",2,5,0)
+  prize = Prize.new(1,1)
+  monster << Monster.new("El lenguas",20,prize,badConsequence)
+           
+#Bicéfalo
+badConsequence = 
+  BadConsequence.newLevelNumberOfTreasures("Te faltan manos para tanto cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",3,5,0)
+  prize = Prize.new(1,1)
+  monster << Monster.new("Bicéfalo",20,prize,badConsequence)  
+  
+puts monster # imprimimos monstruos
