@@ -169,10 +169,10 @@ def nivel_superior_10(monsters)
   end
 end
 
-def solo_perdida_niveles(monsters)
+def solo_perdida_niveles(monsters,levels) #Perdida de niveles < a levels
   for monster in monsters
     bc = monster.badconsequence()
-    if(bc.levels() != 0 && bc.nHiddenTreasures() == 0 && bc.nVisibletreasures() == 0 && bc.death() == false && 
+    if(bc.levels() < levels &&#&& bc.nHiddenTreasures() == 0 && bc.nVisibletreasures() == 0 && bc.death() == false && 
           bc.specificVisibleTreasures() == nil && bc.specificHiddenTreasures() == nil)
       puts monster
     end
@@ -188,16 +188,16 @@ def ganancia_sup_1(monsters)
   end
 end
 
-def perdida_especifica(monsters)
+def perdida_especifica(monsters,level)
   for monster in monsters
     bc = monster.bc
-    if(bc.levels == 0 && bc.nHiddenTreasures == 0 && bc.nVisibleTreasures == 0 && bc.death == false && 
+    if(bc.levels <= level && bc.nHiddenTreasures == 0 && bc.nVisibleTreasures == 0 && bc.death == false && 
           (bc.specificVisibleTreasures != nil || bc.specificHiddenTreasures != nil))
-      puts monster
+      puts level
     end
   end
 end
 
 #nivel_superior_10(monster)
-solo_perdida_niveles(monster)
+solo_perdida_niveles(monster,2)
 #puts monster # imprimimos monstruos
