@@ -10,7 +10,7 @@ class Monster
     @badconsequence = badConsequence
   end
   
-  attr_accessor :name, :combatLevel 
+  attr_accessor :name, :combatLevel,:badconsequence,:combatLevel
   
   def to_s
     "\n\nNombre Monstruo: #{@name} 

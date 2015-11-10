@@ -161,4 +161,43 @@ badConsequence =
   prize = Prize.new(1,1)
   monster << Monster.new("Bicéfalo",20,prize,badConsequence)  
   
-puts monster # imprimimos monstruos
+def nivel_superior_10(monsters)
+  for monster in monsters
+    if (monster.combatLevel > 10)
+      puts monster
+    end
+  end
+end
+
+def solo_perdida_niveles(monsters,levels) #Perdida de niveles < a levels
+  for monster in monsters
+    bc = monster.badconsequence()
+    if(bc.levels() < levels &&#&& bc.nHiddenTreasures() == 0 && bc.nVisibletreasures() == 0 && bc.death() == false && 
+          bc.specificVisibleTreasures() == nil && bc.specificHiddenTreasures() == nil)
+      puts monster
+    end
+  end
+end
+
+def ganancia_sup_1(monsters)
+  for monster in monsters
+    prize = monster.prize
+    if(prize.level > 1)
+      puts monster
+    end
+  end
+end
+
+def perdida_especifica(monsters,level)
+  for monster in monsters
+    bc = monster.bc
+    if(bc.levels <= level && bc.nHiddenTreasures == 0 && bc.nVisibleTreasures == 0 && bc.death == false && 
+          (bc.specificVisibleTreasures != nil || bc.specificHiddenTreasures != nil))
+      puts level
+    end
+  end
+end
+
+#nivel_superior_10(monster)
+solo_perdida_niveles(monster,2)
+#puts monster # imprimimos monstruos
