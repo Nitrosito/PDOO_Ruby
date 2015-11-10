@@ -6,7 +6,8 @@ class Dice
   include singleton
 
   def nextNumber
-    
+    numero= %w{1 2 3 4 5 6}
+    return rand(numero.length)
   end
   
 end

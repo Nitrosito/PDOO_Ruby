@@ -50,5 +50,26 @@ class BadConsequence
          Muerte: #{@death}\n"
   end
   
+  public
+  def isEmpty
+    if @nVisibleTreasures ==0 && @nHiddenTreasures==0 && @specificVisibleTreasures.size==0 && @specificHiddenTreasures==0
+      return true
+    end
+    
+    return false
+  end
+  
+  def substractVisibleTreasure(t)
+    
+  end
+  
+  def substractHiddenTreasure(t)
+    
+  end
+  
+  def adjustToFittreasureLists(v,h)
+    
+  end
+  
   
 end
