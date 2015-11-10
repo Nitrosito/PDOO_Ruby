@@ -38,12 +38,12 @@ class CardDealer
     
   end
   
-  def giveTreasureBack
-    
+  def giveTreasureBack(t)
+    @usedTreasures.push(t)
   end
   
-  def giveMonsterBack
-    
+  def giveMonsterBack(m)
+    @usedMonsters.push(m)
   end
   
   def initCards
