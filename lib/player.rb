@@ -15,7 +15,7 @@ class Player
     @MAXLEVEL=10
   end
   
-  attr_reader :name, :level, :hiddenTreasures, :visibleTreasures 
+  attr_reader :name, :level, :hiddenTreasures, :visibleTreasures, :dead 
   attr_writer :pendingBadConsequence  
   
   def bringToLife()
