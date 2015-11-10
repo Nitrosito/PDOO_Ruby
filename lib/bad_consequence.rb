@@ -29,6 +29,14 @@ class BadConsequence
     new(aText,0,0,0,nil,nil,death)
   end
   
+  def isEmpty()
+      if(@levels == 0 && @nVisibleTreasures ==0 && @nHiddenTreasures == 0 && !@death)
+        if(@specificHiddenTreasures.empty? && @specificVisibleTreasures.empty?)
+          true
+        end
+      end
+    end
+  
   private_class_method:new 
   
   def to_s
