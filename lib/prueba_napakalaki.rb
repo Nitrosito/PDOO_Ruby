@@ -100,7 +100,7 @@ badConsequence =
           
 #Los hondos
 badConsequence =
-  BadConsequence.newDeath("Estos monstruos resultan bastante superficiales y te aburren mortalmente")
+  BadConsequence.newDeath("Estos monstruos resultan bastante superficiales y te aburren mortalmente",true)
   prize = Prize.new(2,1)
   monster << Monster.new("Los hondos",8,prize,badConsequence)
             
@@ -198,6 +198,6 @@ def perdida_especifica(monsters,level)
   end
 end
 
-#nivel_superior_10(monster)
-solo_perdida_niveles(monster,2)
+nivel_superior_10(monster)
+#solo_perdida_niveles(monster,2)
 #puts monster # imprimimos monstruos

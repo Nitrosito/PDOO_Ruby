@@ -5,21 +5,31 @@
 class Player
   def initialize(name)
     @name=name
-    @level
+    @level=1
     @dead=true
     @canISteal=true
-    @enemy
-    @hiddenTreasures
-    @visibleTreasures
-    @pendingBadConsequence
-    @MAXLEVEL=10
+    @enemy=nil
+    @hiddenTreasures=Array.new
+    @visibleTreasures=Array.new
+    @pendingBadConsequence=nil
+    @@MAXLEVEL=10
   end
   
   attr_reader :name, :level, :hiddenTreasures, :visibleTreasures, :dead, :canISteal 
-  attr_writer :pendingBadConsequence,:@enemy 
+  attr_writer :pendingBadConsequence,:enemy 
+  
+  private
+  
+  def canYouGiveMeATreasure()
+    if(@hiddenTreasures.empty?)
+      return false
+    end
+    return true
+ end
+ 
   
   def bringToLife()
-    @dead=true
+    @dead=false
   end
   
 def getCombatLevel()
@@ -27,7 +37,7 @@ def getCombatLevel()
     @visibleTreasures.each do |i|
       suma = suma+i.bonus
     end
-    @level+suma
+    return @level+suma
   end
   
   def incrementLevels(i)
@@ -35,6 +45,10 @@ def getCombatLevel()
        if(@level>10)
            @level=10;
        end
+  end
+  
+  def haveStolen()
+    @canISteal=false
   end
   
   def decrementLevels(i)
@@ -75,17 +89,7 @@ def getCombatLevel()
   def giveMeATreasure()
     
   end
-  
-def canYouGiveMeATreasure()
-    if(! @visibleTreasures.empty? || ! @hiddenTreasures.empty?)
-      return true
-    end
-    return false
-  end
-  
-  def haveStolen()
-    @canISteal=false
-  end
+ 
 
   public
   
@@ -106,10 +110,9 @@ def canYouGiveMeATreasure()
   end
   
   def validState()
-    if(@pendingBadConsequence.empty() && @hiddenTreasures <=4)
+    if(@pendingBadConsequence.isEmpty && @hiddenTreasures <=4)
       return true
     end
-  else
     return false
   end
   
