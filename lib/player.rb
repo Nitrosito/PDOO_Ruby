@@ -67,9 +67,6 @@ class Player
   end
 
   public
-  def isDead()
-    
-  end
   
   def combat(m)
     
