@@ -7,7 +7,7 @@ class Player
     @name=name
     @level
     @dead=true
-    @canlSteal=true
+    @canISteal=true
     @enemy
     @hiddenTreasures
     @visibleTreasures
@@ -15,23 +15,33 @@ class Player
     @MAXLEVEL=10
   end
   
-  attr_reader :name, :level, :hiddenTreasures, :visibleTreasures, :dead 
-  attr_writer :pendingBadConsequence  
+  attr_reader :name, :level, :hiddenTreasures, :visibleTreasures, :dead, :canISteal 
+  attr_writer :pendingBadConsequence,:@enemy 
   
   def bringToLife()
-    
+    @dead=true
   end
   
-  def getCombatLevel()
-    
+def getCombatLevel()
+    suma = 0
+    @visibleTreasures.each do |i|
+      suma = suma+i.bonus
+    end
+    @level+suma
   end
   
   def incrementLevels(i)
-    
+       @level+=i
+       if(@level>10)
+           @level=10;
+       end
   end
   
   def decrementLevels(i)
-    
+    @level-=i
+    if(@level<1)
+           @level=1
+    end
   end
   
   def applyPrize(m)
@@ -46,24 +56,35 @@ class Player
     
   end
   
-  def howManyVisibleTreasures(tKind)
-    
+  def howManyVisibleTreasures(tkind)
+    @visibleTreasures.each do |i|
+    n = 0
+      if(tkind == i)
+        n += 1
+      end
+    end
+    return n
   end
   
-  def dielNoTreasures()
-    
+  def dielfNoTreasures()
+    if(@hiddenTreasures.empty? && @visibleTreasures.empty?)
+      @dead = true;
+    end
   end
   
   def giveMeATreasure()
     
   end
   
-  def canYouGiveMeATreasure()
-    
+def canYouGiveMeATreasure()
+    if(! @visibleTreasures.empty? || ! @hiddenTreasures.empty?)
+      return true
+    end
+    return false
   end
   
   def haveStolen()
-    
+    @canISteal=false
   end
 
   public
@@ -85,7 +106,11 @@ class Player
   end
   
   def validState()
-    
+    if(@pendingBadConsequence.empty() && @hiddenTreasures <=4)
+      return true
+    end
+  else
+    return false
   end
   
   def initTreasure()
@@ -95,18 +120,7 @@ class Player
   def stealTreasure()
     
   end
-  
-  def setEnemy(enemy)
-    
-  end
-  
-  def canlSteal()
-    
-  end
-  
-  def descardAlltreasures()
-    
-  end
+        
 end
 
 
