@@ -244,11 +244,11 @@ class CardDealer
   end
   
   def shuffleTreasures
-    
+    @unusedTreasures.shuffle
   end
   
   def shuffleMonsters
-    
+    @unusedMonster.shuffle 
   end
   
   public 
