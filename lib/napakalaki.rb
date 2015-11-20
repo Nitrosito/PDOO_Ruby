@@ -6,14 +6,18 @@ class Napakalaki
   include singleton
   
   def initialize
-    @currentlayer
+    @currentPlayer
     @players
     @dealer
     @currentMonster
   end
   
+  attr_reader :currentPlayer, :currentMonster
+  
   def initPlayers(names)
-    
+    for name in names
+      @players.add(name)
+    end
   end
   
   def nextPlayer
@@ -63,6 +67,9 @@ class Napakalaki
   end
   
   def endOfGame(result)
-    
+    if result==WINGAME
+      return true
+    end
+    return false
   end
 end
