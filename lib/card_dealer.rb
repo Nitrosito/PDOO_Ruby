@@ -256,11 +256,25 @@ class CardDealer
   public 
   
   def nextTreasure
-  
+    if @unusedTreasures.isEmpty()
+      @unusedTreasures=@usedTreasures
+      shuffleTreasures()
+      @usedTreasures.clear
+    end
+    salida =@unusedTreasures.at(@unusedTreasures.size-1)
+    @unusedTreasures.delete(@unusedTreasures.size-1)
+    return salida
   end
   
   def nextMonster
-    
+    if @unusedMonster.isEmpty()
+      @unusedMonster=@usedMonster
+      shuffleMonsters()
+      @usedMonster.clear
+    end
+    salida =@unusedMonster.at(@unusedMonster.size-1)
+    @unusedMonster.delete(@unusedMonster.size-1)
+    return salida
   end
   
   def giveTreasureBack(t)
