@@ -67,8 +67,52 @@ def getCombatLevel()
   end
   
   def canMakeTreasureVisible(t)
+    if(@visibleTreasures.size()>=4)
+      return false
+    end
     
-  end
+    unamano=0
+    dosmanos=0
+    cabeza=0
+    zapatos=0
+    armadura=0
+    @visibleTreasures.each do|i|
+          if(@visibleTreasures.at(i).type()==ONEHAND)
+            unamano+=1
+          end
+          
+          if(@visibleTreasures.at(i).type()==BOTHHANDS)
+            dosmanos+=1
+          end 
+          
+          if(@visibleTreasures.at(i).type()==HELMET)
+            cabeza+=1
+          end 
+          
+          if(@visibleTreasures.at(i).type()==SHOES)
+            zapatos+=1
+          end 
+          
+          if(@visibleTreasures.at(i).type()==ARMOR)
+            armadura+=1
+          end 
+   end   
+   
+    if((cabeza == 1 && t.type()==HELMET) ||
+          (zapatos ==1 && t.type()==SHOES) ||
+          (armadura ==1 && t.type()==ARMOR))
+      return false
+    end
+    
+    if((unamano==1 && t.type() == BOTHHANDS) ||
+          (dosmanos==1 && t.type()==BOTHHANDS)||
+           (unamano==2 && t.type()==ONEHAND))
+      return false
+    end
+    
+    return true;
+end
+
   
   def howManyVisibleTreasures(tkind)
     @visibleTreasures.each do |i|
