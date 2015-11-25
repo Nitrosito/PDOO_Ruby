@@ -14,6 +14,8 @@ class Napakalaki
     @currentMonster=nil
   end
   
+  attr_reader  :currentPlayer, :currentMonster 
+  
   def initPlayers(names)
     names.each do |i|
       @players << Player.new(i);
@@ -43,7 +45,13 @@ class Napakalaki
   end
   
   def setEnemies
-    
+    @players.each do |i|
+      aleatorio = rand(@players.size())
+      while(@players.at(aleatorio) == @players.at(i))
+              aleatorio = rand(@players.size())
+      end
+      @players.at(i).enemy = @players.at(aleatorio)  
+    end
   end
   
   public
@@ -69,7 +77,7 @@ class Napakalaki
   end
   
   def getCurrentPlayer
-    
+    return @current
   end
   
   def getCurrentMonster
@@ -81,6 +89,12 @@ class Napakalaki
   end
   
   def endOfGame(result)
+    if(@result==WINGAME)
+      return true
+    end
     
+      return false
   end
+  
+  
 end
