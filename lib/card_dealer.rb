@@ -286,7 +286,8 @@ class CardDealer
   end
   
   def initCards
-    
+    initTreasureCardDeck()
+    initMonsterCardDeck()
   end
   
   
