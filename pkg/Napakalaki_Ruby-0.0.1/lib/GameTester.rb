@@ -7,7 +7,7 @@
 #última
 
 require 'singleton'
-require_relative 'napakalaki.rb'
+require_relative 'napakalaki'
 require_relative 'Command'
 
 module Test
@@ -15,7 +15,6 @@ module Test
 class GameTester
 
   include Singleton
- 
   public
   def play(aGame, numberOfPlayers)
     

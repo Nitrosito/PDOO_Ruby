@@ -10,7 +10,7 @@ class Napakalaki
   def initialize
     @currentPlayer=nil
     @players=Array.new
-    @dealer=CardDealer.instance
+    @dealer=Cardealer.instance
     @currentMonster=nil
   end
   
@@ -57,41 +57,27 @@ class Napakalaki
   public
   
   def developCombat
-    aux=@currentPlayer.combat(@currentMonster)
-    @dealer.giveMonsterBack(@currentMonster)
-    return aux
+    
   end
   
   def discardVisibleTreasures(treasures)
-    for treasure in treasures
-      @currentPlayer.discardVisibleTreasure(treasure)
-      @dealer.giveTreasureBack(treasure)
-    end
+    
   end
   
   def discardHiddenTreasures(treasures)
-    for treasure in treasures
-      @currentPlayer.discardHiddenTreasure(treasure)
-      @dealer.giveTreasureBack(treasure)
-    end
+    
   end
   
   def makeTreasuresVisible(treasures)
-    for treasure in treasures
-      @currentPlayer.makeTreasureVisible(treasure)
-    end
+    
   end
   
   def initGame(players)
-    self.initPlayers(players)
-    self.setEnemies()
-    self.nextTurn()
-    @dealer.initCards()
-    self.nextTurn()
+    
   end
   
   def getCurrentPlayer
-    return @currentPlayer
+    return @current
   end
   
   def getCurrentMonster
@@ -99,16 +85,7 @@ class Napakalaki
   end
   
   def nextTurn
-    stateOK=nextTurnAllowed()
-    if stateOK
-      @currentMonster=@dealer.nextMonster()
-      @currentPlayer=nextPlayer()
-      dead=@currentPlayer.isDead()
-      if dead
-        @currentPlayer.initTreasures()
-      end
-    end
-    return stateOK
+    
   end
   
   def endOfGame(result)
