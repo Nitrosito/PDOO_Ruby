@@ -7,14 +7,15 @@ require_relative 'treasure.rb'
 require_relative 'treasure_kind.rb'
 require_relative 'monster.rb'
 require_relative 'prize.rb'
+require_relative 'bad_consequence.rb'
 class CardDealer
   include Singleton
   
    attr_accessor :unusedMonsters, :usedMonsters, :usedTreasures, :unusedTreasures
    
-  def initializer
-    @unusedMonster = Array.new
-    @usedMonster = Array.new
+  def initialize
+    @unusedMonsters = Array.new
+    @usedMonsters = Array.new
     @unusedTreasures = Array.new
     @usedTreasures = Array.new
   end
@@ -72,7 +73,7 @@ class CardDealer
     @unusedTreasures << Treasure.new("Garabato mistico",2,[TreasureKind::ONEHAND])
 
     #La rebeca metalica
-    @unusedTreasures << Treasure.new("LA rebeca metalica",2[TreasureKind::ARMOR])
+    @unusedTreasures << Treasure.new("LA rebeca metalica",2,[TreasureKind::ARMOR])
 
     #Lanzallamas
     @unusedTreasures << Treasure.new("Lanzallamas",4,[TreasureKind::BOTHHANDS])
