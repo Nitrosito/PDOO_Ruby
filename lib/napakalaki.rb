@@ -90,14 +90,6 @@ class Napakalaki
     self.nextTurn()
   end
   
-  def getCurrentPlayer
-    return @currentPlayer
-  end
-  
-  def getCurrentMonster
-    
-  end
-  
   def nextTurn
     stateOK=nextTurnAllowed()
     if stateOK
