@@ -201,7 +201,7 @@ end
     return false
   end
   
-  def initTreasure()
+  def initTreasures()
     dealer=CardDealer.getInstance()
     dice=Dice.getInstance()
     bringToLife()
