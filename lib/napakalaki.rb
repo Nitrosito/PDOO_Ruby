@@ -36,7 +36,7 @@ class Napakalaki
     return @players.at(actual+1);
   end
   
-  def nextTurnIsAllowed
+  def nextTurnAllowed
     if(@currentPlayer==nil)
         return false
     end

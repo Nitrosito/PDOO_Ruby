@@ -7,16 +7,18 @@ require 'singleton'
 class CardDealer
   include Singleton
   
+   attr_accessor :unusedMonsters, :usedMonsters, :usedTreasures, :unusedTreasures
+   
   def initializer
-    @unusedMonster
-    @usedMonster
-    @unusedTreasures
-    @usedTreasures    
+    @unusedMonster = Array.new
+    @usedMonster = Array.new
+    @unusedTreasures = Array.new
+    @usedTreasures = Array.new
   end
   
   def initTreasureCardDeck
     #¡Si mi amo!
-    @unusedTreasures << Treasure.new("¡Si mi amo!",4,[TreasureKind::HELMET])
+    @unusedTreasures << Treasure.new('¡Si mi amo!',4,TreasureKind::HELMET)
 
     #Botas de investigacion
     @unusedTreasures << Treasure.new("Botas de investigacion",3,[TreasureKind::SHOES])
