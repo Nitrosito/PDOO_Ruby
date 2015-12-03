@@ -3,7 +3,8 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require 'singleton'
-
+require_relative 'treasure.rb'
+require_relative 'treasure_kind.rb'
 class CardDealer
   include Singleton
   
@@ -18,7 +19,7 @@ class CardDealer
   
   def initTreasureCardDeck
     #¡Si mi amo!
-    @unusedTreasures << Treasure.new('¡Si mi amo!',4,TreasureKind::HELMET)
+    @unusedTreasures << Treasure.new('¡Si mi amo!',4,[TreasureKind::HELMET])
 
     #Botas de investigacion
     @unusedTreasures << Treasure.new("Botas de investigacion",3,[TreasureKind::SHOES])
