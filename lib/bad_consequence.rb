@@ -4,7 +4,7 @@
 
 class BadConsequence
   @@MAXTREASURES=10
-  def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures, someSpecificHiddenTreasures, death)
+  def initialize(aText, someLevels, someVisibleTreasures, someHiddenTreasures, someSpecificVisibleTreasures=Array.new, someSpecificHiddenTreasures=Array.new, death)
     @text = aText
     @levels = someLevels
     @nVisibleTreasures = someVisibleTreasures
@@ -14,7 +14,8 @@ class BadConsequence
     @death = death
   end
   
-    attr_accessor :text, :levels, :nVisibletreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures
+  #FIXME text y muerte no lo pide
+    attr_reader :text, :levels, :nVisibletreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures
 
   
   def self.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
@@ -29,14 +30,7 @@ class BadConsequence
     new(aText,0,0,0,nil,nil,death)
   end
   
-  def isEmpty()
-      if(@levels == 0 && @nVisibleTreasures ==0 && @nHiddenTreasures == 0 && !@death)
-        if(@specificHiddenTreasures.empty? && @specificVisibleTreasures.empty?)
-          true
-        end
-      end
-    end
-  
+ 
   private_class_method:new 
   
   def to_s
@@ -51,6 +45,7 @@ class BadConsequence
   end
   
   public
+  #FIXME
   def isEmpty
     if @nVisibleTreasures ==0 && @nHiddenTreasures==0 && @specificVisibleTreasures.size==0 && @specificHiddenTreasures==0
       return true
