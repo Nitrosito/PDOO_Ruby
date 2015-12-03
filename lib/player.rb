@@ -76,7 +76,7 @@ def getCombatLevel()
     nLevels=badConsequence.getLevels()
     decrementsLevels(nLevels)
     pendingBad=badConsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-    setPendingBadConsequence(pendingBad)
+      @pendingBadConsequence=pendingBad
   end
   
   def canMakeTreasureVisible(t)
