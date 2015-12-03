@@ -290,9 +290,11 @@ class CardDealer
     @usedMonsters.push(m)
   end
   
-  def initCards
+def initCards
     initTreasureCardDeck()
+    shuffleTreasures()
     initMonsterCardDeck()
+    shuffleMonsters
   end
   
   
