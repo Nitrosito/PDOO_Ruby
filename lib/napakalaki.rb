@@ -47,10 +47,10 @@ class Napakalaki
   def setEnemies
     @players.each do |i|
       aleatorio = rand(@players.size())
-      while(@players.at(aleatorio) == @players.at(i))
+      while(@players.at(aleatorio) == i)
               aleatorio = rand(@players.size())
       end
-      @players.at(i).enemy = @players.at(aleatorio)  
+      i.enemy = @players.at(aleatorio)  
     end
   end
   
