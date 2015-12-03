@@ -5,6 +5,8 @@
 require 'singleton'
 require_relative 'treasure.rb'
 require_relative 'treasure_kind.rb'
+require_relative 'monster.rb'
+require_relative 'prize.rb'
 class CardDealer
   include Singleton
   
