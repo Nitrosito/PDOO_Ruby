@@ -3,8 +3,8 @@
 # and open the template in the editor.
 
 class Player
-  def initialize(name)
-    @name=name
+  def initialize(namev)
+    @name=namev
     @level=1
     @dead=true
     @canISteal=true
@@ -240,7 +240,7 @@ end
       discardHiddenTreasure(treasure)
     end
   end
-        
+          
 end
 
 

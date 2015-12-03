@@ -7,7 +7,7 @@
 #última
 
 require 'singleton'
-require_relative 'napakalaki.rb'
+require_relative 'napakalaki'
 require_relative 'Command'
 
 module Test
@@ -24,7 +24,7 @@ class GameTester
     @game.initGame(names) 
     
     begin #Mientras dure la partida
-      currentPlayer=@game.getCurrentPlayer()
+      currentPlayer=@game.currentPlayer
       begin #Mientras el jugador se decide a conocer al monstruo
         puts "******* ******* ******* ******* ******* ******* *******"
         puts "\n\n Turno de: " + currentPlayer.to_s() 
@@ -205,7 +205,7 @@ class GameTester
 #        gets
       when  Command::ShowMonster then 
         puts "\n------- ------- ------- ------- ------- ------- ------- "
-        puts "El monstruo actual es:\n\n" + @game.getCurrentMonster().to_s()
+        puts "El monstruo actual es:\n\n" + @game.currentMonster.to_s()
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::ShowVisibleTreasure then

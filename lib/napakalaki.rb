@@ -2,8 +2,14 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require 'singleton'
-require 'card_dealer.rb'
-require 'player.rb'
+require_relative 'card_dealer.rb'
+require_relative'player.rb'
+require_relative 'bad_consequence.rb'
+require_relative 'dice.rb'
+require_relative 'combat_result.rb'
+require_relative 'monster.rb'
+require_relative 'treasure.rb'
+require_relative 'treasure_kind.rb'
 class Napakalaki
   include Singleton
   
@@ -21,6 +27,7 @@ class Napakalaki
       @players << Player.new(i);
     end
   end
+  
   
   def nextPlayer
     if(@currentPlayer==nil) 
