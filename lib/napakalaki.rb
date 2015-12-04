@@ -10,6 +10,7 @@ require_relative 'combat_result.rb'
 require_relative 'monster.rb'
 require_relative 'treasure.rb'
 require_relative 'treasure_kind.rb'
+module NapakalakiGame
 class Napakalaki
   include Singleton
   
@@ -121,4 +122,5 @@ class Napakalaki
   end
   
   
+end
 end

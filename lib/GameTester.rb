@@ -139,7 +139,7 @@ class GameTester
      
     begin #Se descartan tesoros hasta que se vuelve al menÃº anterior
       if visible then
-        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.visibleTreasures, true)
+        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.getVisibleTreasures, true)
       else 
         howMany = showTreasures("Elige tesoros ocultos para descartar", aPlayer.getHiddenTreasures(), true)
       end

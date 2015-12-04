@@ -12,6 +12,7 @@ require_relative "treasure"
 require_relative "treasure_kind"
 require_relative "monster"
 require_relative "dice"
+module NapakalakiGame
 class CardDealer
   include Singleton
   
@@ -304,4 +305,5 @@ def initCards
   
   
   
+end
 end

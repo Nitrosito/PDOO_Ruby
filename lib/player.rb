@@ -10,7 +10,7 @@ require_relative "prize.rb"
 require_relative "treasure_kind"
 require_relative "card_dealer"
 require_relative "combat_result"
-
+module NapakalakiGame
 class Player
   @@MAXLEVEL=10
   def initialize(namev)
@@ -84,9 +84,9 @@ def getCombatLevel()
   end
   
   def applyBadConsequence(m)
-    badConsequence=m.getBadConsequence()
-    nLevels=badConsequence.getLevels()
-    decrementsLevels(nLevels)
+    badConsequence=m.badconsequence
+    nLevels=badConsequence.levels()
+    decrementLevels(nLevels)
     pendingBad=badConsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
       @pendingBadConsequence=pendingBad
   end
@@ -175,17 +175,17 @@ end
   
   def combat(m)
     myLevel=getCombatLevel()
-    monsterLevel=m.getCombatLevel()
+    monsterLevel=m.combatLevel
     if myLevel>monsterLevel
       applyPrize(m)
       if(@level >= @@MAXLEVEL)
-        return WINGAME
+        return CombatResult::WINGAME
       else
-        return WIN
+        return CombatResult::WIN
       end
     else
       applyBadConsequence(m)
-      return LOSE
+      return CombatResult::LOSE
     end
   end
   
@@ -199,7 +199,7 @@ end
   end
   
   def discardVisibleTreasure(t)
-    @visibleTreasures.delete_at(t)
+    @visibleTreasures.delete(t)
     if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractVisibleTreasure(t)
     end
@@ -207,11 +207,11 @@ end
   end
   
   def discardHiddenTreasure(t)
-    @hiddenTreasures.delete_at(t)
+    @hiddenTreasures.delete(t)
     if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractHiddenTreasure(t)
     end
-    dielNoTreasures()
+    dielfNoTreasures()
   end
   
   def validState()
@@ -240,7 +240,7 @@ end
   end
   
   def stealTreasure()
-    canI=canSteal()
+    canI=canISteal
     if canI
       canYou=@enemy.canYouGiveMeATreasure()
       if canYou
@@ -253,7 +253,7 @@ end
     return nil
   end
   
-  def discardAlltreasures()
+  def discardAllTreasures()
     for treasure in @visibleTreasures
       discardVisibleTreasure(treasure)
     end
@@ -269,6 +269,7 @@ end
 
   end
           
+end
 end
 
 
