@@ -12,4 +12,13 @@ class Treasure
   
   attr_reader :name, :bonus, :type
   
+  public
+  
+  def to_s
+	        
+	    "\nNombre del tesoro = #{@name}
+	   \nBonus = #{@bonus}
+	    \nTipo = #{@type}"
+	    
+	end
 end

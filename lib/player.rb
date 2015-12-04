@@ -57,13 +57,7 @@ def getCombatLevel()
        end
   end
   
-  def getVisibleTreasures()
-    @visibleTreasures
-  end
   
-  def getHiddenTreasures()
-    @hiddenTreasures
-  end
   
   def haveStolen()
     @canISteal=false
@@ -171,6 +165,14 @@ end
 
   public
   
+  def getVisibleTreasures()
+    return @visibleTreasures
+  end
+  
+  def getHiddenTreasures()
+   return @hiddenTreasures
+  end
+  
   def combat(m)
     myLevel=getCombatLevel()
     monsterLevel=m.getCombatLevel()
@@ -258,6 +260,13 @@ end
     for treasure in @hiddenTreasures
       discardHiddenTreasure(treasure)
     end
+  end
+  
+  def to_s
+
+    "\nNombre del jugador: #{@name}
+    \nNivel del jugador: #{@level}"
+
   end
           
 end
