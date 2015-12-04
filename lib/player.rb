@@ -241,11 +241,12 @@ def getCombatLevel()
   end
   
   def discardAllTreasures()
-    for treasure in @visibleTreasures
-      discardVisibleTreasure(treasure)
+    @visibleTreasures.each do |i|
+      discardVisibleTreasure(i)
     end
-    for treasure in @hiddenTreasures
-      discardHiddenTreasure(treasure)
+    
+    @hiddenTreasures.each do |i|
+      discardHiddenTreasure(i)
     end
   end
   
