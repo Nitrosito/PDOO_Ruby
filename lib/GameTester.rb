@@ -10,6 +10,7 @@ require 'singleton'
 require_relative 'napakalaki'
 require_relative 'Command'
 
+
 module Test
 
 class GameTester
@@ -138,7 +139,7 @@ class GameTester
      
     begin #Se descartan tesoros hasta que se vuelve al menÃº anterior
       if visible then
-        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.getVisibleTreasures(), true)
+        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.visibleTreasures, true)
       else 
         howMany = showTreasures("Elige tesoros ocultos para descartar", aPlayer.getHiddenTreasures(), true)
       end
@@ -156,7 +157,7 @@ class GameTester
   def manageMakeTreasureVisible (aPlayer)
        
     begin #Se hacen tesoros visibles hasta que se vuelve al menÃº anterior
-      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.getHiddenTreasures(), true)
+      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.visibleTreasures, true)
       option = getTreasure (howMany);
       if (option > -1) then
         aPlayer.makeTreasureVisible (aPlayer.getHiddenTreasures()[option])

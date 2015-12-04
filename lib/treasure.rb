@@ -11,4 +11,5 @@ class Treasure
   end
   
   attr_reader :name, :bonus, :type
+  
 end

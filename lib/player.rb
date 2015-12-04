@@ -1,8 +1,18 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
+require_relative "card_dealer.rb"
+require_relative "bad_consequence.rb"
+require_relative "dice.rb"
+require_relative "treasure.rb"
+require_relative "napakalaki.rb"
+require_relative "prize.rb"
+require_relative "treasure_kind"
+require_relative "card_dealer"
+require_relative "combat_result"
 
 class Player
+  @@MAXLEVEL=10
   def initialize(namev)
     @name=namev
     @level=1
@@ -11,11 +21,11 @@ class Player
     @enemy=nil
     @hiddenTreasures=Array.new
     @visibleTreasures=Array.new
-    @pendingBadConsequence=nil
-    @@MAXLEVEL=10
+    @pendingBadConsequence=BadConsequence.newLevelNumberOfTreasures('', 0, 0, 0)
+    
   end
   
-  attr_reader :name, :level, :hiddenTreasures, :visibleTreasures, :dead, :canISteal 
+  attr_reader :name, :level, :dead, :canISteal 
   attr_writer :pendingBadConsequence,:enemy 
   
   private
@@ -45,6 +55,14 @@ def getCombatLevel()
        if(@level>10)
            @level=10;
        end
+  end
+  
+  def getVisibleTreasures()
+    @visibleTreasures
+  end
+  
+  def getHiddenTreasures()
+    @hiddenTreasures
   end
   
   def haveStolen()
@@ -158,7 +176,7 @@ end
     monsterLevel=m.getCombatLevel()
     if myLevel>monsterLevel
       applyPrize(m)
-      if(@level >= MAXLEVEL)
+      if(@level >= @@MAXLEVEL)
         return WINGAME
       else
         return WIN
@@ -205,7 +223,8 @@ end
     dealer=CardDealer.getInstance()
     dice=Dice.getInstance()
     bringToLife()
-    treasure=dealer.nextNumber()
+    treasure=dealer.nextTreasure()
+    number=dice.nextNumber()
     
     if number > 1
       treasure1=dealer.nextTreasure()

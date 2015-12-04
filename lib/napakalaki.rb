@@ -32,20 +32,23 @@ class Napakalaki
   def nextPlayer
     if(@currentPlayer==nil) 
       aleatorio = rand(@players.size())
+      @currentPlayer=@players[aleatorio]
       return @players.at(aleatorio)
     end
     
     if(@players.index(@currentPlayer)==@players.size()-1)
+      @currentPlayer=@players[0]
       return @players.at(0);      
     end
     
     actual = @players.index(@currentPlayer)
+    @currentPlayer=@players[actual+1]
     return @players.at(actual+1);
   end
   
   def nextTurnAllowed
     if(@currentPlayer==nil)
-        return false
+        return true
     end
     
     return @currentPlayer.validState()

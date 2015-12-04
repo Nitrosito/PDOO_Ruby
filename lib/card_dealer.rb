@@ -3,11 +3,15 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require 'singleton'
-require_relative 'treasure.rb'
-require_relative 'treasure_kind.rb'
-require_relative 'monster.rb'
-require_relative 'prize.rb'
-require_relative 'bad_consequence.rb'
+require_relative "player"
+require_relative "napakalaki"
+require_relative "bad_consequence"
+require_relative "combat_result"
+require_relative "prize"
+require_relative "treasure"
+require_relative "treasure_kind"
+require_relative "monster"
+require_relative "dice"
 class CardDealer
   include Singleton
   
@@ -262,7 +266,7 @@ class CardDealer
   public 
   
   def nextTreasure
-    if @unusedTreasures.isEmpty()
+    if @unusedTreasures.empty?
       @unusedTreasures=@usedTreasures
       shuffleTreasures()
       @usedTreasures.clear
@@ -273,8 +277,8 @@ class CardDealer
   end
   
   def nextMonster
-    if @unusedMonsters.isEmpty()
-      @unusedMonsters=@usedMonster
+    if @unusedMonsters.empty?
+      @unusedMonsters=@usedMonsters
       shuffleMonsters()
       @usedMonster.clear
     end
