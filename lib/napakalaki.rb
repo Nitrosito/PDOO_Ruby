@@ -25,7 +25,7 @@ class Napakalaki
   
   def initPlayers(names)
     names.each do |i|
-      @players << Player.new(i);
+      @players << Player.new(i)
     end
   end
   
@@ -33,17 +33,17 @@ class Napakalaki
   def nextPlayer
     if(@currentPlayer==nil) 
       aleatorio = rand(@players.size())
-      @currentPlayer=@players[aleatorio]
+      @currentPlayer=@players.at(aleatorio)
       return @players.at(aleatorio)
     end
     
-    if(@players.index(@currentPlayer)==@players.size()-1)
-      @currentPlayer=@players[0]
-      return @players.at(0);      
+    if(@currentPlayer==@players.at(@players.size()-1))
+      @currentPlayer=@players.at(0)
+      return @players.at(0)     
     end
     
     actual = @players.index(@currentPlayer)
-    @currentPlayer=@players[actual+1]
+    @currentPlayer=@players.at(actual+1)
     return @players.at(actual+1);
   end
   
@@ -74,22 +74,22 @@ class Napakalaki
   end
   
   def discardVisibleTreasures(treasures)
-    for treasure in treasures
-      @currentPlayer.discardVisibleTreasure(treasure)
-      @dealer.giveTreasureBack(treasure)
+    treasures.each do |i|
+      @currentPlayer.discardVisibleTreasure(i)
+      @dealer.giveTreasureBack(i)
     end
   end
   
   def discardHiddenTreasures(treasures)
-    for treasure in treasures
-      @currentPlayer.discardHiddenTreasure(treasure)
-      @dealer.giveTreasureBack(treasure)
+    treasures.each do |i|
+      @currentPlayer.discardHiddenTreasure(i)
+      @dealer.giveTreasureBack(i)
     end
   end
   
   def makeTreasuresVisible(treasures)
-    for treasure in treasures
-      @currentPlayer.makeTreasureVisible(treasure)
+    treasures.each do |i|
+      @currentPlayer.makeTreasureVisible(i)
     end
   end
   

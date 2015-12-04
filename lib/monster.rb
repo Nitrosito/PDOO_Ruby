@@ -14,7 +14,7 @@ class Monster
   attr_reader :name, :combatLevel,:badconsequence
   
   
-  
+  public
   def getLevelsGained
     @prize.level
   end
@@ -23,7 +23,7 @@ class Monster
     @prize.treasures
   end
   
-  public
+  
   def to_s
     "\n\nNombre Monstruo: #{@name} 
        Nivel Combate: #{@combatLevel}

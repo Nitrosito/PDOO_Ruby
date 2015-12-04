@@ -30,12 +30,7 @@ class Player
   
   private
   
-  def canYouGiveMeATreasure()
-    if(@hiddenTreasures.empty?)
-      return false
-    end
-    return true
- end
+
  
   
   def bringToLife()
@@ -75,7 +70,6 @@ def getCombatLevel()
     incrementLevels(nLevels)
     nTreasures=m.getTreasuresGained()
     if nTreasures > 0
-      dealer=CardDealer.getInstance()
       for i in 0..nTreasures
         aux=dealer.nextTreasure()
         @hiddenTreasures << aux
@@ -92,56 +86,46 @@ def getCombatLevel()
   end
   
   def canMakeTreasureVisible(t)
-    if(@visibleTreasures.size()>=4)
-      return false
+    puedo = false
+    
+    unamano = 0
+    dosmanos = 0
+    armadura = 0
+    casco = 0
+    zapatos = 0
+    
+    @visibleTreasures.each do |i|
+      if i.type == TreasureKind::ONEHAND
+        unamano += 1
+      elsif i.type == TreasureKind::BOTHHANDS
+        dosmanos += 1
+      elsif i.type == TreasureKind::ARMOR
+        armadura += 1
+      elsif i.type == TreasureKind::HELMET
+        casco += 1
+      elsif i.type == TreasureKind::SHOES
+        zapatos += 1
+      end
     end
     
-    unamano=0
-    dosmanos=0
-    cabeza=0
-    zapatos=0
-    armadura=0
-    @visibleTreasures.each do|i|
-          if(@visibleTreasures.at(i).type()==ONEHAND)
-            unamano+=1
-          end
-          
-          if(@visibleTreasures.at(i).type()==BOTHHANDS)
-            dosmanos+=1
-          end 
-          
-          if(@visibleTreasures.at(i).type()==HELMET)
-            cabeza+=1
-          end 
-          
-          if(@visibleTreasures.at(i).type()==SHOES)
-            zapatos+=1
-          end 
-          
-          if(@visibleTreasures.at(i).type()==ARMOR)
-            armadura+=1
-          end 
-   end   
-   
-    if((cabeza == 1 && t.type()==HELMET) ||
-          (zapatos ==1 && t.type()==SHOES) ||
-          (armadura ==1 && t.type()==ARMOR))
-      return false
-    end
-    
-    if((unamano==1 && t.type() == BOTHHANDS) ||
-          (dosmanos==1 && t.type()==BOTHHANDS)||
-           (unamano==2 && t.type()==ONEHAND))
-      return false
-    end
-    
-    return true;
-end
+      if (t.type == TreasureKind::ONEHAND && unamano < 2 && dosmanos == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::BOTHHANDS && unamano == 0 && dosmanos == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::ARMOR && armadura == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::HELMET && casco == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::SHOES && zapatos == 0)
+        puedo = true
+      end 
+    return puedo
+  end
 
   
   def howManyVisibleTreasures(tkind)
+        n = 0
     @visibleTreasures.each do |i|
-    n = 0
       if(tkind == i)
         n += 1
       end
@@ -150,11 +134,12 @@ end
   end
   
   def dielfNoTreasures()
-    if(@hiddenTreasures.empty? && @visibleTreasures.empty?)
-      @dead = true;
+    if(@hiddenTreasures.size==0 && @visibleTreasures.size==0)
+      @dead = false;
     end
   end
-  
+  ##FIXME
+    public
   def giveMeATreasure()
     rnd=Rand(@hiddenTreasures.size())
     aux = @hiddenTreasures.at(rnd)
@@ -162,9 +147,11 @@ end
     return aux
   end
  
-
-  public
   
+    def canYouGiveMeATreasure()
+      return !@hiddenTreasures.empty?
+    end
+ 
   def getVisibleTreasures()
     return @visibleTreasures
   end
@@ -193,14 +180,13 @@ end
     canI=canMakeTreasureVisible(t)
     if canI
       @visibleTreasures << t
-    else
-      @hiddenTreasures.delete_at(t)
+      @hiddenTreasures.delete(t)
     end
   end
   
   def discardVisibleTreasure(t)
     @visibleTreasures.delete(t)
-    if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
+    if @pendingBadConsequence!=nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractVisibleTreasure(t)
     end
     dielfNoTreasures()
@@ -208,7 +194,7 @@ end
   
   def discardHiddenTreasure(t)
     @hiddenTreasures.delete(t)
-    if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
+    if @pendingBadConsequence!=nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractHiddenTreasure(t)
     end
     dielfNoTreasures()

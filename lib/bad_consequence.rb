@@ -15,11 +15,11 @@ class BadConsequence
   end
   
   #FIXME text y muerte no lo pide
-    attr_reader :text, :levels, :nVisibletreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures
+    attr_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures
 
   
   def self.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
-    new(aText,someLevels,someVisibleTreasures,someHiddenTreasures,nil,nil,false)
+    new(aText,someLevels,someVisibleTreasures,someHiddenTreasures,Array.new,Array.new,false)
   end
   
   def self.newLevelSpecificTreasures(aText,someLevels,someSpecificVisibleTreasures,someSpecificHiddenTreasures)
@@ -27,7 +27,7 @@ class BadConsequence
   end
   
   def self.newDeath(aText,death)
-    new(aText,0,0,0,nil,nil,death)
+    new(aText,0,0,0,Array.new,Array.new,death)
   end
   
  
@@ -47,7 +47,7 @@ class BadConsequence
   public
   #FIXME
   def isEmpty
-    if @nVisibleTreasures ==0 && @nHiddenTreasures==0 && @specificVisibleTreasures==[] && @specificHiddenTreasures==[]
+    if @nVisibleTreasures ==0 && @nHiddenTreasures==0 && @specificVisibleTreasures.size==0 && @specificHiddenTreasures.size==0
       return true
     end
     
@@ -85,70 +85,64 @@ class BadConsequence
     end
   end
   
-  def adjustToFitTreasureLists(v,h)
-    badConsequenceAdjust=BadConsequence.newLevelNumberOfTreasures('', 1, 0, 0); #???????????????????????? asi o se crea?
-        nVis=0, nHid=0
-        nuevosVisibles=Array.new
-        nuevosHidden=Array.new
-        if(@nVisibleTreasures>0 || @nHiddenTreasures>0)
-            
-            if(@nVisibleTreasures>v.size)
-                nVis=v.size
-            #Si la pérdida de tesoros no supera a los tesoros del jugador
-            #se queda con los tesosos originales
-            else
-                nVis=@nVisibleTreasures
-            end
-            
-            if(@nHiddenTreasures>h.size)
-                nHid=h.size
-            else
-                nHid=@nHiddenTreasures
-            end
-        
-            #Creación del badConsequence ajustado:
-           
-            badConsequenceAdjust=BadConsequence.newLevelNumberOfTreasures( "", 0, nVis,nHid)
-        
-        
-        
-        else
-          if( v.size > 0 || h.size > 0)
-            #Recorro la lista de tesoros visibles del jugador y del mal rollo, y
-            #los que coincidan serán añadidos al badconsequence ajustado.
-            copiaVisible=Array.new(v)
-            copiaHidden=Array.new(h)
-            
-            
-            v.each do|vis|
-              
-                copiaVisible.each { |elementoCopiaVisible|
+def adjustToFitTreasureLists(v, h)
+            tesoros_visibles = Array.new
+            tesoros_ocultos = Array.new
+            nv = 0
+            nh = 0
+            bc = BadConsequence.newLevelNumberOfTreasures("",0,0,0)
+
+            if @nHiddenTreasures > 0 or @nVisibleTreasures > 0
+                if @nVisibleTreasures > v.size 
+                  nv = v.size
                     
-                    if(vis.type == elementoCopiaVisible)
-                        nuevosVisibles<<elementoCopiaVisible
-                        copiaVisible.delete(elementoCopiaVisible)
-                        break
-                    end
-                }             
-            end
-            
-            h.each do |hid|
-                copiaHidden.each { |elementoCopiaHidden|
                     
-                    if(hid.type == elementoCopiaHidden)
-                        nuevosHidden<<elementoCopiaHidden
-                        copiaHidden.delete(elementoCopiaHidden)
-                        break
-                    end
-                }
-             
-            end
-            badConsequenceAdjust=BadConsequence.newLevelSpecificTreasures( "", 0, nuevosHidden,nuevosVisibles); 
+                else
+                  nv = @nVisibleTreasures  
+                end
+
+                if @nHiddenTreasures > h.size
+                  nh = h.size                    
+                else
+                  nh = @nHiddenTreasures
+                end
+
+                bc = BadConsequence.newLevelNumberOfTreasures(@text,0,nv,nh)
+            else
+              esta = false
+              if @specificVisibleTreasures == nil
+                @specificVisibleTreasures = Array.new
+              end
+              @specificVisibleTreasures.each do |specificVisibleTreasure|
+                v.each do |treasure|  
+                  if treasure.type == specificVisibleTreasure
+                    esta = true
+                end
+                  if(esta)
+                    tesoros_visibles << specificVisibleTreasure
+                  end             
+                
+                end  
+              end
+              if @specificHiddenTreasures == nil
+                @specificHiddenTreasures = Array.new
+              end
+              @specificHiddenTreasures.each do |specificHiddenTreasure|
+                v.each do |treasure|  
+                  if treasure.type == specificHiddenTreasure
+                    esta = true
+                end
+                  if(esta)
+                    tesoros_ocultos << specificHiddenTreasure
+                  end             
+                
+                end  
+              end
+              bc = BadConsequence.newLevelSpecificTreasures(@text,0,tesoros_visibles, tesoros_ocultos)
+            return bc
+
         end
-        end
-        return badConsequenceAdjust;
-  end
-  
+    end  
   
 end
 end
