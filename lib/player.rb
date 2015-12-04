@@ -220,8 +220,8 @@ end
   end
   
   def initTreasures()
-    dealer=CardDealer.getInstance()
-    dice=Dice.getInstance()
+    dealer=CardDealer.instance()
+    dice=Dice.instance()
     bringToLife()
     treasure=dealer.nextTreasure()
     number=dice.nextNumber()

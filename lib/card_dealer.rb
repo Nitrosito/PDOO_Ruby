@@ -280,7 +280,7 @@ class CardDealer
     if @unusedMonsters.empty?
       @unusedMonsters=@usedMonsters
       shuffleMonsters()
-      @usedMonster.clear
+      @usedMonsters.clear
     end
     salida =@unusedMonsters.at(@unusedMonsters.size-1)
     @unusedMonsters.delete(@unusedMonsters.size-1)

@@ -47,7 +47,7 @@ class BadConsequence
   public
   #FIXME
   def isEmpty
-    if @nVisibleTreasures ==0 && @nHiddenTreasures==0 && @specificVisibleTreasures.size==0 && @specificHiddenTreasures==0
+    if @nVisibleTreasures ==0 && @nHiddenTreasures==0 && @specificVisibleTreasures==[] && @specificHiddenTreasures==[]
       return true
     end
     
