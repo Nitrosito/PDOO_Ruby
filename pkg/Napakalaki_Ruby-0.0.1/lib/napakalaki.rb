@@ -10,7 +10,7 @@ class Napakalaki
   def initialize
     @currentPlayer=nil
     @players=Array.new
-    @dealer=Cardealer.instance
+    @dealer=CardDealer.instance
     @currentMonster=nil
   end
   
@@ -36,7 +36,7 @@ class Napakalaki
     return @players.at(actual+1);
   end
   
-  def nextTurnIsAllowed
+  def nextTurnAllowed
     if(@currentPlayer==nil)
         return false
     end
@@ -47,37 +47,51 @@ class Napakalaki
   def setEnemies
     @players.each do |i|
       aleatorio = rand(@players.size())
-      while(@players.at(aleatorio) == @players.at(i))
+      while(@players.at(aleatorio) == i)
               aleatorio = rand(@players.size())
       end
-      @players.at(i).enemy = @players.at(aleatorio)  
+      i.enemy = @players.at(aleatorio)  
     end
   end
   
   public
   
   def developCombat
-    
+    aux=@currentPlayer.combat(@currentMonster)
+    @dealer.giveMonsterBack(@currentMonster)
+    return aux
   end
   
   def discardVisibleTreasures(treasures)
-    
+    for treasure in treasures
+      @currentPlayer.discardVisibleTreasure(treasure)
+      @dealer.giveTreasureBack(treasure)
+    end
   end
   
   def discardHiddenTreasures(treasures)
-    
+    for treasure in treasures
+      @currentPlayer.discardHiddenTreasure(treasure)
+      @dealer.giveTreasureBack(treasure)
+    end
   end
   
   def makeTreasuresVisible(treasures)
-    
+    for treasure in treasures
+      @currentPlayer.makeTreasureVisible(treasure)
+    end
   end
   
   def initGame(players)
-    
+    self.initPlayers(players)
+    self.setEnemies()
+    self.nextTurn()
+    @dealer.initCards()
+    self.nextTurn()
   end
   
   def getCurrentPlayer
-    return @current
+    return @currentPlayer
   end
   
   def getCurrentMonster
@@ -85,7 +99,16 @@ class Napakalaki
   end
   
   def nextTurn
-    
+    stateOK=nextTurnAllowed()
+    if stateOK
+      @currentMonster=@dealer.nextMonster()
+      @currentPlayer=nextPlayer()
+      dead=@currentPlayer.isDead()
+      if dead
+        @currentPlayer.initTreasures()
+      end
+    end
+    return stateOK
   end
   
   def endOfGame(result)

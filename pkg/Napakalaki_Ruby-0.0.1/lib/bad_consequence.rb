@@ -59,38 +59,38 @@ class BadConsequence
     return false
   end
   
-def substractVisibleTreasure(t)
- esta=false
- @specificVisibleTreasures.each do |i|
-   if t.getType() == @specificVisibleTreasures.at(i)
-    esta=true
+  def substractVisibleTreasure(t)
+    esta=false
+    @specificVisibleTreasures.each do |i|
+      if t.getType() == @specificVisibleTreasures.at(i)
+        esta=true
+      end
     end
-   end
- 
- if esta
-   @specificVisibleTreasures.delete(i)
- elseif @nVisibleTreasures > 0
-        @nVisibleTreasures -=1
- end
- 
-end
+    
+    if esta
+      @specificVisibleTreasures.delete(i)
+    elseif @nVisibleTreasures > 0
+      @nVisibleTreasures -=1
+    end
+    
+  end
   
   def substractHiddenTreasure(t)
      esta=false
- @specificHiddenTreasures.each do |i|
-   if t.getType() == @specificHiddenTreasures.at(i)
-    esta=true
+    @specificHiddenTreasures.each do |i|
+      if t.getType() == @specificHiddenTreasures.at(i)
+        esta=true
+      end
     end
-   end
- 
- if esta
-   @specificHiddenTreasures.delete(i)
- elseif @nHiddenTreasures > 0
-        @nHiddenTreasures -=1
- end
+    
+    if esta
+      @specificHiddenTreasures.delete(i)
+    elseif @nHiddenTreasures > 0
+      @nHiddenTreasures -=1
+    end
   end
   
-  def adjustToFittreasureLists(v,h)
+  def adjustToFitTreasureLists(v,h)
     
   end
   

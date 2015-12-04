@@ -3,20 +3,22 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require 'singleton'
-
+require 'treasure.rb'
 class CardDealer
   include Singleton
   
-  def initializer
-    @unusedMonster
-    @usedMonster
-    @unusedTreasures
-    @usedTreasures    
+   attr_accessor :unusedMonster, :usedMonster, :usedTreasures, :unusedTreasures
+   
+  def initialize
+    @unusedMonsters = Array.new
+    @usedMonster = Array.new
+    @unusedTreasures = Array.new
+    @usedTreasures = Array.new
   end
   
   def initTreasureCardDeck
     #¡Si mi amo!
-    @unusedTreasures << Treasure.new("¡Si mi amo!",4,[TreasureKind::HELMET])
+    @unusedTreasures << Treasure.new('¡Si mi amo!',4,[TreasureKind::HELMET])
 
     #Botas de investigacion
     @unusedTreasures << Treasure.new("Botas de investigacion",3,[TreasureKind::SHOES])
@@ -256,27 +258,25 @@ class CardDealer
   public 
   
   def nextTreasure
-   if @unusedTreasures.isEmpty()
+    if @unusedTreasures.isEmpty()
       @unusedTreasures=@usedTreasures
       shuffleTreasures()
       @usedTreasures.clear
-   end
-   
-   salida =@unusedTreasures.at(@unusedTreasures.size-1)
-   @unusedTreasures.delete(@unusedTreasures.size-1)
-   return salida
+    end
+    salida =@unusedTreasures.at(@unusedTreasures.size-1)
+    @unusedTreasures.delete(@unusedTreasures.size-1)
+    return salida
   end
   
   def nextMonster
-   if @unusedMonster.isEmpty()
+    if @unusedMonster.isEmpty()
       @unusedMonster=@usedMonster
       shuffleMonsters()
       @usedMonster.clear
-   end
-   
-   salida =@unusedMonster.at(@unusedMonster.size-1)
-   @unusedMonster.delete(@unusedMonster.size-1)
-   return salida 
+    end
+    salida =@unusedMonster.at(@unusedMonster.size-1)
+    @unusedMonster.delete(@unusedMonster.size-1)
+    return salida
   end
   
   def giveTreasureBack(t)
@@ -288,7 +288,8 @@ class CardDealer
   end
   
   def initCards
-    
+    initTreasureCardDeck()
+    initMonsterCardDeck()
   end
   
   

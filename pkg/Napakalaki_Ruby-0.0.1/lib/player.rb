@@ -59,11 +59,24 @@ def getCombatLevel()
   end
   
   def applyPrize(m)
-    
+    nLevels=m.getLevelsGained()
+    incrementLevels(nLevels)
+    nTreasures=m.getTreasuresGained()
+    if nTreasures > 0
+      dealer=CardDealer.getInstance()
+      for i in 0..nTreasures
+        aux=dealer.nextTreasure()
+        @hiddenTreasures << aux
+      end
+    end
   end
   
   def applyBadConsequence(m)
-    
+    badConsequence=m.getBadConsequence()
+    nLevels=badConsequence.getLevels()
+    decrementsLevels(nLevels)
+    pendingBad=badConsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+    setPendingBadConsequence(pendingBad)
   end
   
   def canMakeTreasureVisible(t)
@@ -131,9 +144,9 @@ end
   end
   
   def giveMeATreasure()
-    aleatorio = rand(@hiddenTreasures.size())
-    aux = @hiddenTreasures.at(aleatorio)
-    @hiddenTreasures.delete_at(aleatorio)
+    rnd=Rand(@hiddenTreasures.size())
+    aux = @hiddenTreasures.at(rnd)
+    @hiddenTreasures.delete_at(rnd)
     return aux
   end
  
@@ -141,19 +154,44 @@ end
   public
   
   def combat(m)
-    
+    myLevel=getCombatLevel()
+    monsterLevel=m.getCombatLevel()
+    if myLevel>monsterLevel
+      applyPrize(m)
+      if(@level >= MAXLEVEL)
+        return WINGAME
+      else
+        return WIN
+      end
+    else
+      applyBadConsequence(m)
+      return LOSE
+    end
   end
   
   def makeTreasureVisible(t)
-    
+    canI=canMakeTreasureVisible(t)
+    if canI
+      @visibleTreasures << t
+    else
+      @hiddenTreasures.delete_at(t)
+    end
   end
   
-  def discardVisibletreasure(t)
-    
+  def discardVisibleTreasure(t)
+    @visibleTreasures.delete_at(t)
+    if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
+      @pendingBadConsequence.substractVisibleTreasure(t)
+    end
+    dielNoTreasures()
   end
   
   def discardHiddenTreasure(t)
-    
+    @hiddenTreasures.delete_at(t)
+    if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
+      @pendingBadConsequence.substractHiddenTreasure(t)
+    end
+    dielNoTreasures()
   end
   
   def validState()
@@ -164,11 +202,43 @@ end
   end
   
   def initTreasure()
+    dealer=CardDealer.getInstance()
+    dice=Dice.getInstance()
+    bringToLife()
+    treasure=dealer.nextNumber()
     
+    if number > 1
+      treasure1=dealer.nextTreasure()
+      @hiddenTreasures << treasure1
+    end
+    
+    if number ==6
+      treasure1=dealer.nextTreasure()
+      @hiddenTreasures << treasure1
+    end
   end
   
   def stealTreasure()
-    
+    canI=canSteal()
+    if canI
+      canYou=@enemy.canYouGiveMeATreasure()
+      if canYou
+        treasure=@enemy.giveMeATreasure()
+        @hiddenTreasures << treasure
+        haveStolen()
+        return treasure
+      end
+    end
+    return nil
+  end
+  
+  def discardAlltreasures()
+    for treasure in @visibleTreasures
+      discardVisibleTreasure(treasure)
+    end
+    for treasure in @hiddenTreasures
+      discardHiddenTreasure(treasure)
+    end
   end
         
 end
