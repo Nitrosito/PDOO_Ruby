@@ -203,7 +203,7 @@ end
     if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractVisibleTreasure(t)
     end
-    dielNoTreasures()
+    dielfNoTreasures()
   end
   
   def discardHiddenTreasure(t)
@@ -215,7 +215,7 @@ end
   end
   
   def validState()
-    if(@pendingBadConsequence.isEmpty && @hiddenTreasures <=4)
+    if(@pendingBadConsequence.isEmpty && @hiddenTreasures.size <=4)
       return true
     end
     return false
@@ -226,16 +226,17 @@ end
     dice=Dice.instance()
     bringToLife()
     treasure=dealer.nextTreasure()
+    @hiddenTreasures<< treasure
     number=dice.nextNumber()
     
     if number > 1
       treasure1=dealer.nextTreasure()
-      @hiddenTreasures << treasure1
+      @hiddenTreasures<< treasure1
     end
     
     if number ==6
       treasure1=dealer.nextTreasure()
-      @hiddenTreasures << treasure1
+      @hiddenTreasures<< treasure1
     end
   end
   
