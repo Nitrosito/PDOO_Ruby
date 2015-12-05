@@ -166,7 +166,7 @@ class CardDealer
 
       #El gorron en el umbral
         badConsequence =
-          BadConsequence.newLevelNumberOfTreasures("Pierdes todos tus tesoros visibles",5,0,0);
+          BadConsequence.newLevelNumberOfTreasures("Pierdes todos tus tesoros visibles",@@MAXTREASURES,0,0);
         prize = Prize.new(3,1)
         @unusedMonsters << Monster.new("El gorron en el umbral",10,prize,badConsequence)
 
