@@ -25,7 +25,7 @@ class Player
     
   end
   
-  attr_reader :name, :level, :dead, :canISteal 
+  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures
   attr_writer :pendingBadConsequence,:enemy 
   
   private
@@ -153,14 +153,6 @@ def getCombatLevel()
       return !@hiddenTreasures.empty?
     end
  
-  def getVisibleTreasures()
-    return @visibleTreasures
-  end
-  
-  def getHiddenTreasures()
-   return @hiddenTreasures
-  end
-  
   def combat(m)
     myLevel=getCombatLevel()
     monsterLevel=m.combatLevel
@@ -179,7 +171,7 @@ def getCombatLevel()
   
   def makeTreasureVisible(t)
     canI=canMakeTreasureVisible(t)
-    if canI
+    if canI==true
       @visibleTreasures << t
       @hiddenTreasures.delete(t)
     end

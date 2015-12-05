@@ -139,16 +139,16 @@ class GameTester
      
     begin #Se descartan tesoros hasta que se vuelve al menÃº anterior
       if visible then
-        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.getVisibleTreasures, true)
+        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.visibleTreasures, true)
       else 
-        howMany = showTreasures("Elige tesoros ocultos para descartar", aPlayer.getHiddenTreasures(), true)
+        howMany = showTreasures("Elige tesoros ocultos para descartar", aPlayer.hiddenTreasures(), true)
       end
       option = getTreasure (howMany)
       if (option > -1) then 
         if visible then
-          @game.discardVisibleTreasures ([aPlayer.getVisibleTreasures().at(option)])
+          @game.discardVisibleTreasures ([aPlayer.visibleTreasures().at(option)])
         else
-          @game.discardHiddenTreasures ([aPlayer.getHiddenTreasures().at(option)])          
+          @game.discardHiddenTreasures ([aPlayer.hiddenTreasures().at(option)])          
         end
       end
     end while (option != -1)  
@@ -157,10 +157,11 @@ class GameTester
   def manageMakeTreasureVisible (aPlayer)
        
     begin #Se hacen tesoros visibles hasta que se vuelve al menÃº anterior
-      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.getVisibleTreasures(), true)
+              #FIXME @nitrosito: He tenido que cambiar visibleTreasures por hiddenTreasures
+      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.hiddenTreasures(), true)
       option = getTreasure (howMany);
       if (option > -1) then
-        aPlayer.makeTreasureVisible (aPlayer.getHiddenTreasures()[option])
+        aPlayer.makeTreasureVisible (aPlayer.hiddenTreasures()[option])
       end
     end while (option != -1)
   end
@@ -210,11 +211,11 @@ class GameTester
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::ShowVisibleTreasure then
-        showTreasures("Esta es tu lista de tesoros visibles", aPlayer.getVisibleTreasures(), false)
+        showTreasures("Esta es tu lista de tesoros visibles", aPlayer.visibleTreasures(), false)
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::ShowHiddenTreasure then
-        showTreasures("Esta es tu lista de tesoros ocultos", aPlayer.getHiddenTreasures(), false)
+        showTreasures("Esta es tu lista de tesoros ocultos", aPlayer.hiddenTreasures(), false)
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::MakeTreasureVisible then
