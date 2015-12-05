@@ -70,6 +70,7 @@ def getCombatLevel()
     incrementLevels(nLevels)
     nTreasures=m.getTreasuresGained()
     if nTreasures > 0
+      dealer=CardDealer.instance
       for i in 0..nTreasures
         aux=dealer.nextTreasure()
         @hiddenTreasures << aux

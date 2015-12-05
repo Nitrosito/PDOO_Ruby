@@ -158,7 +158,7 @@ class GameTester
        
     begin #Se hacen tesoros visibles hasta que se vuelve al menÃº anterior
               #FIXME @nitrosito: He tenido que cambiar visibleTreasures por hiddenTreasures
-      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.hiddenTreasures(), true)
+      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.hiddenTreasures, true)
       option = getTreasure (howMany);
       if (option > -1) then
         aPlayer.makeTreasureVisible (aPlayer.hiddenTreasures()[option])

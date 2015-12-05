@@ -15,7 +15,7 @@ class BadConsequence
   end
   
   #FIXME text y muerte no lo pide
-    attr_reader :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures,:MAXTREASURES
+    attr_accessor :text, :levels, :nVisibleTreasures, :nHiddenTreasures, :death, :specificVisibleTreasures, :specificHiddenTreasures,:MAXTREASURES
 
   
   def self.newLevelNumberOfTreasures(aText,someLevels,someVisibleTreasures,someHiddenTreasures)
@@ -57,7 +57,7 @@ class BadConsequence
   def substractVisibleTreasure(t)
     esta=false
     @specificVisibleTreasures.each do |i|
-      if t.getType() == @specificVisibleTreasures.at(i)
+      if t.type == @specificVisibleTreasures.at(i).type
         esta=true
       end
     end
