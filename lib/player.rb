@@ -122,7 +122,7 @@ def getCombatLevel()
     return puedo
   end
 
-  
+  #FIXME i , o i.type?
   def howManyVisibleTreasures(tkind)
         n = 0
     @visibleTreasures.each do |i|
@@ -142,7 +142,7 @@ def getCombatLevel()
   ##FIXME
     public
   def giveMeATreasure()
-    rnd=Rand(@hiddenTreasures.size())
+    rnd=rand(@hiddenTreasures.size())
     aux = @hiddenTreasures.at(rnd)
     @hiddenTreasures.delete_at(rnd)
     return aux
