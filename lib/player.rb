@@ -135,9 +135,10 @@ def getCombatLevel()
   
   def dielfNoTreasures()
     if(@hiddenTreasures.size==0 && @visibleTreasures.size==0)
-      @dead = false;
+      @dead=true
     end
   end
+  
   ##FIXME
     public
   def giveMeATreasure()
