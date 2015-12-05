@@ -53,7 +53,7 @@ class BadConsequence
     
     return false
   end
-  
+    
   def substractVisibleTreasure(t)
     esta=false
     @specificVisibleTreasures.each do |i|
