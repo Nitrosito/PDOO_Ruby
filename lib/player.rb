@@ -218,7 +218,7 @@ def getCombatLevel()
       treasure1=dealer.nextTreasure()
       @hiddenTreasures<< treasure1
     end
-  end
+  end 
   
   def stealTreasure()
     canI=canISteal
@@ -246,8 +246,8 @@ def getCombatLevel()
   
   def to_s
 
-    "\nNombre del jugador: #{@name}
-    \nNivel del jugador: #{@level}"
+    "Nombre del jugador: #{@name}
+     Nivel del jugador: #{@level}"
 
   end
           
