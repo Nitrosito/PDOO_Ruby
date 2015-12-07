@@ -26,7 +26,7 @@ class Player
   end
   
   attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures
-  attr_writer :pendingBadConsequence,:enemy 
+  attr_writer :pendingBadConsequence,:enemy,:hiddenTreasures,:visibleTreasures,:level,:dead
   
   private
   
