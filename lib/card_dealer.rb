@@ -268,12 +268,14 @@ class CardDealer
   
   def nextTreasure
     if @unusedTreasures.size==0
-      @unusedTreasures=@usedTreasures
+      @usedTreasures.each do |tre|
+        @unusedTreasures << tre
+      end
       shuffleTreasures()
       @usedTreasures.clear
     end
     salida =@unusedTreasures.at(0)
-    @unusedTreasures.delete(0)
+    @unusedTreasures.delete_at(0)
     return salida
   end
   
@@ -300,7 +302,7 @@ def initCards
     initTreasureCardDeck()
     shuffleTreasures()
     initMonsterCardDeck()
-    shuffleMonsters
+    shuffleMonsters()
   end
   
   
