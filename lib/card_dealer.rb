@@ -23,6 +23,7 @@ class CardDealer
     @usedMonsters = Array.new
     @unusedTreasures = Array.new
     @usedTreasures = Array.new
+    @unusedCultist=Array.new
   end
   
   def initTreasureCardDeck
@@ -298,14 +299,32 @@ class CardDealer
     @usedMonsters<<m
   end
   
-def initCards
+  def initCards
     initTreasureCardDeck()
     shuffleTreasures()
     initMonsterCardDeck()
     shuffleMonsters()
+    initCultistCardDeck()
+    shuffleCultist()
   end
   
+  private
+  def shuffleCultist()
+    @unusedCultist.shuffle!
+  end
   
+  def initCultistCardDeck()
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
+    @unusedCultist << Cultist.new("Sectario +2 por cada sectario en juego. No puedes dejar de ser sectario",2)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
+    @unusedCultist << Cultist.new("Sectario +2 por cada sectario en juego. No puedes dejar de ser sectario",2)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
+      
+  end
   
+  def nextCultist
+    return nil
+  end
 end
 end

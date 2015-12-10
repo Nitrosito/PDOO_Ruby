@@ -9,10 +9,17 @@ class Monster
     @combatLevel = combatLevel
     @prize = prize
     @badconsequence = badConsequence
+    @levelChangeAgainstCultistPlayer=0
   end
   
-  attr_reader :name, :combatLevel,:badconsequence
+  attr_reader :name, :combatLevel,:badconsequence, :levelChangeAgainstCultistPlayer
   
+  
+  
+  def newCultistMonster(name,combatLevel,prize,badConsequence,IC)
+    new(name,combatLevel,prize,badConsequence,IC)
+  end
+  private_class_method:new
   
   public
   def getLevelsGained
@@ -29,6 +36,10 @@ class Monster
        Nivel Combate: #{@combatLevel}
        Buen Rollo #{@prize.to_s}
        Mal rollo: #{@badconsequence.to_s}" 
+  end
+  
+  def getCombatLevelAgainstCultistPlayer
+    return @combatLevel+@levelChangeAgainstCultistPlayer
   end
 end
 

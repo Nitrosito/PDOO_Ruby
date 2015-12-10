@@ -37,13 +37,7 @@ class Player
     @dead=false
   end
   
-def getCombatLevel()
-    suma = 0
-    @visibleTreasures.each do |i|
-      suma = suma+i.bonus
-    end
-    return @level+suma
-  end
+
   
   def incrementLevels(i)
        @level+=i
@@ -166,6 +160,10 @@ def getCombatLevel()
       end
     else
       applyBadConsequence(m)
+      if(shouldConvert())
+        return CombatResult::LOSEANDCONVERT
+      end
+      
       return CombatResult::LOSE
     end
   end
@@ -249,6 +247,27 @@ def getCombatLevel()
     "Nombre del jugador: #{@name}
      Nivel del jugador: #{@level}"
 
+  end
+  
+  protected
+  def getOponentLevel 
+    return 1
+  end
+  
+  def shouldConvert
+    dado=dado1.nextNumber()
+    if(dado==1)
+      return true
+    end
+    return false
+  end
+  
+  def getCombatLevel()
+    suma = 0
+    @visibleTreasures.each do |i|
+      suma = suma+i.bonus
+    end
+    return @level+suma
   end
           
 end

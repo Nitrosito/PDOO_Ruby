@@ -69,6 +69,13 @@ class Napakalaki
   
   def developCombat
     aux=@currentPlayer.combat(@currentMonster)
+    if(aux==CombatResult::LOSEANDCONVERT)
+      carta=@dealer.nextCultist()
+      jugador = CultistPlayer.new(carta, @currentPlayer)
+      posicionjugador=@players.indexOf(@currentPlayer)  #no se si es asi
+      @currentPlayer=jugador
+      @players.set(posicionjugador,jugador)  #no se si es asi
+    end
     @dealer.giveMonsterBack(@currentMonster)
     return aux
   end
