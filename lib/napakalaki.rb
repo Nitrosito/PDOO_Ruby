@@ -4,6 +4,7 @@
 require 'singleton'
 require_relative 'card_dealer.rb'
 require_relative'player.rb'
+require_relative 'cultist_player.rb'
 require_relative 'bad_consequence.rb'
 require_relative 'dice.rb'
 require_relative 'combat_result.rb'

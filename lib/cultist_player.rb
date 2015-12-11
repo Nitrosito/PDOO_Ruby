@@ -9,7 +9,7 @@ class CultistPlayer < Player
     @myCultistCard = myCultistCard
   end
   
-  attr_accesor :totalCultistPlayers
+  attr_accessor :totalCultistPlayers
   
   protected 
   def getCombatLevel(m)

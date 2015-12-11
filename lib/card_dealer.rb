@@ -335,7 +335,7 @@ class CardDealer
       @usedMonsters.clear
     end
     salida =@unusedMonsters.at(0)
-    @unusedMonsters.delete(0)
+    @unusedMonsters.delete(salida)
     return salida
   end
   
@@ -371,6 +371,7 @@ class CardDealer
       
   end
   
+  public
   def nextCultist
     res=@unusedCultist.at(0)
     @unusedCultist.delete_at(0)
