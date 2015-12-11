@@ -4,10 +4,9 @@
 module NapakalakiGame
 class CultistPlayer < Player
   def initialize(myCultistCard,enemy)
+    super(enemy)
     @totalCultistPlayers =0
     @myCultistCard = myCultistCard
-    super
-    @enemy=enemy
   end
   
   attr_accesor :totalCultistPlayers

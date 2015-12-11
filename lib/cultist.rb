@@ -10,6 +10,6 @@ class Cultist
     @gainedLevels=gainedLevels
   end
   
-  attr_accesor :gainedLevels
+  attr_accessor :gainedLevels
 end
 end

@@ -4,22 +4,22 @@
 module NapakalakiGame
 
 class Monster
-  def initialize(name, combatLevel, prize, badConsequence )
+  def initialize(name, combatLevel, prize, badConsequence, lc=0 )
     @name = name
     @combatLevel = combatLevel
     @prize = prize
     @badconsequence = badConsequence
-    @levelChangeAgainstCultistPlayer=0
+    @levelChangeAgainstCultistPlayer=lc
   end
   
   attr_reader :name, :combatLevel,:badconsequence, :levelChangeAgainstCultistPlayer
   
   
   #por que peta?
-  def self.newCultistMonster(name,combatLevel,prize,badConsequence,IC)
-    new(name,combatLevel,prize,badConsequence,IC)
+  def self.newCultistMonster(name,combatLevel,prize,badConsequence,ic)
+    new(name,combatLevel,prize,badConsequence,ic)
   end
-  private_class_method:new
+  
   
   public
   def getLevelsGained

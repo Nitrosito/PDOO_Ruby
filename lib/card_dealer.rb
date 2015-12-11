@@ -12,6 +12,7 @@ require_relative "treasure"
 require_relative "treasure_kind"
 require_relative "monster"
 require_relative "dice"
+require_relative "cultist"
 module NapakalakiGame
 class CardDealer
   include Singleton
@@ -259,40 +260,40 @@ class CardDealer
       badConsequence =
         BadConsequence.newLevelSpecificTreasures("Pierdes 1 mano visible", 0,[TreasureKind::ONEHAND],nil)
       prize = Prize.new(3, 1)
-        @unusedMonsters << Monster.new("El mal indecible impronunciable",10,prize,badConsequence)
+        @unusedMonsters << Monster.newCultistMonster("El mal indecible impronunciable",10,prize,badConsequence,-2)
         
       badConsequence =
         BadConsequence.newLevelNumberOfTreasures("Pierdes tus tesoros visibles. Ja ja ja", 0,5,0)
       prize = Prize.new(2, 1)
-        @unusedMonsters << Monster.new("Testigos Oculares",6,prize,badConsequence)
+        @unusedMonsters << Monster.newCultistMonster("Testigos Oculares",6,prize,badConsequence,+2)
         
       badConsequence =
         BadConsequence.newDeath("Hoy no es tu dia de suerte. Mueres",1)
       prize = Prize.new(2, 5)
-        @unusedMonsters << Monster.new("El gran cthulhu",20,prize,badConsequence)
+        @unusedMonsters << Monster.newCultistMonster("El gran cthulhu",20,prize,badConsequence,+4)
         
       badConsequence =
         BadConsequence.newLevelNumberOfTreasures("Tu gobierno te recorta 2 niveles", 2,0,0)
       prize = Prize.new(2, 1)
-        @unusedMonsters << Monster.new("Serpiente Politico",8,prize,badConsequence)
+        @unusedMonsters << Monster.newCultistMonster("Serpiente Politico",8,prize,badConsequence,-2)
         
     
     #poner lo que pierdes
         
-      badConsequence =
-        BadConsequence.newLevelSpecificTreasures("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas", 0,[TreasureKind::ONEHAND],nil)
-      prize = Prize.new(1, 1)
-        @unusedMonsters << Monster.new("Felpuggoth",2,prize,badConsequence)
+#      badConsequence =
+#        BadConsequence.newLevelSpecificTreasures("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas", 0,[TreasureKind::ONEHAND],nil)
+#      prize = Prize.new(1, 1)
+#        @unusedMonsters << Monster.newCultistMonster("Felpuggoth",2,prize,badConsequence,+5)
         
       badConsequence =
         BadConsequence.newLevelNumberOfTreasures("Pierdes 2 niveles", 2,0,0)
       prize = Prize.new(4, 2)
-        @unusedMonsters << Monster.new("Shoggoth",16,prize,badConsequence)
+        @unusedMonsters << Monster.newCultistMonster("Shoggoth",16,prize,badConsequence,-4)
         
       badConsequence =
         BadConsequence.newLevelNumberOfTreasures("Pintalabios negro. Pierdes 2 niveles", 2,0,0)
       prize = Prize.new(1, 1)
-        @unusedMonsters << Monster.new("Lolitagooth",2,prize,badConsequence)
+        @unusedMonsters << Monster.newCultistMonster("Lolitagooth",2,prize,badConsequence,+3)
 
 #            badConsequence = new BadConsequence("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas.",
 #                    0,new ArrayList(Arrays.asList(TreasureKind.HELMET,TreasureKind.ARMOR)),
@@ -358,17 +359,19 @@ class CardDealer
   end
   
   def initCultistCardDeck()
-    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
-    @unusedCultist << Cultist.new("Sectario +2 por cada sectario en juego. No puedes dejar de ser sectario",2)
-    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
-    @unusedCultist << Cultist.new("Sectario +2 por cada sectario en juego. No puedes dejar de ser sectario",2)
-    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
-    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",1)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",+1)
+    @unusedCultist << Cultist.new("Sectario +2 por cada sectario en juego. No puedes dejar de ser sectario",+2)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",+1)
+    @unusedCultist << Cultist.new("Sectario +2 por cada sectario en juego. No puedes dejar de ser sectario",+2)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",+1)
+    @unusedCultist << Cultist.new("Sectario +1 por cada sectario en juego. No puedes dejar de ser sectario",+1)
       
   end
   
   def nextCultist
-    return nil
+    res=@unusedCultist.at(0)
+    @unusedCultist.delete_at(0)
+    return res
   end
 end
 end

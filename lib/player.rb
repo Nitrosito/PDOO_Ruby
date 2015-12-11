@@ -13,20 +13,26 @@ require_relative "combat_result"
 module NapakalakiGame
 class Player
   @@MAXLEVEL=10
-  def initialize(namev)
+  def initialize(namev, level=1,dead=true,canISteal=true,enemy=nil,ht=Array.new,vt=Array.new,pbc=BadConsequence.newLevelNumberOfTreasures('', 0, 0, 0))
     @name=namev
-    @level=1
-    @dead=true
-    @canISteal=true
-    @enemy=nil
-    @hiddenTreasures=Array.new
-    @visibleTreasures=Array.new
-    @pendingBadConsequence=BadConsequence.newLevelNumberOfTreasures('', 0, 0, 0)
+    @level=level
+    @dead=dead
+    @canISteal=canISteal
+    @enemy=enemy
+    @hiddenTreasures=ht
+    @visibleTreasures=vt
+    @pendingBadConsequence=pbc
     
   end
   
-  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures
-  attr_writer :pendingBadConsequence,:enemy,:hiddenTreasures,:visibleTreasures,:level,:dead
+  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures, :pendingBadConsequence, :enemy
+  attr_writer :enemy
+
+  
+  def self.newCopia(p)
+    new(p.name, p.level,p.dead,p.canISteal,p.enemy,p.hiddenTreasures,p.visibleTreasures,p.pendingBadConsequence)
+    
+  end
   
   private
   
@@ -251,12 +257,13 @@ class Player
   
   protected
   def getOponentLevel(m) 
-    return m.getCombatLevel
+    return m.combatLevel()
   end
   
   def shouldConvert
-    dado=dado1.nextNumber()
-    if(dado==1)
+    dado=Dice.instance
+      dado1=dado.nextNumber()
+    if(dado1==1)
       return true
     end
     return false
