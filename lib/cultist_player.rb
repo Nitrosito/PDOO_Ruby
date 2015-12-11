@@ -10,21 +10,24 @@ class CultistPlayer < Player
     @enemy=enemy
   end
   
+  attr_accesor :totalCultistPlayers
+  
   protected 
   def getCombatLevel(m)
-    return m.combatLevel
+    nvplayer=super.getCombatLevel()  #preguntar si es asi el super
+    res= ((nvplayer*0.2)+nvplayer)+(m.getLevelsGained() * @totalCultistPlayers)
+    return res
   end
   
   def getOponentLevel(m)
-    #cosa rara
-    return 0
+    return m.getCombatLevelAgainstCultistPlayer()
   end
   
   def shouldConvert
     return false
   end
   
-  private
+  private  #estos dos no los se
   def giveMeATreasure
     return nil
   end
@@ -32,10 +35,7 @@ class CultistPlayer < Player
   def canYouGiveMeATreasure
     
   end
-  
-  def getTotalCultistPlayers
-    return 1
-  end
+
   
 end
 end

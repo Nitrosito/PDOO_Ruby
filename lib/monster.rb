@@ -15,8 +15,8 @@ class Monster
   attr_reader :name, :combatLevel,:badconsequence, :levelChangeAgainstCultistPlayer
   
   
-  
-  def newCultistMonster(name,combatLevel,prize,badConsequence,IC)
+  #por que peta?
+  def self.newCultistMonster(name,combatLevel,prize,badConsequence,IC)
     new(name,combatLevel,prize,badConsequence,IC)
   end
   private_class_method:new

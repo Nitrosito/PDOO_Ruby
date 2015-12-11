@@ -255,6 +255,50 @@ class CardDealer
         BadConsequence.newLevelNumberOfTreasures("Te faltan manos para tanto cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos",3,5,0)
         prize = Prize.new(1,1)
         @unusedMonsters << Monster.new("Bicéfalo",20,prize,badConsequence) 
+        
+      badConsequence =
+        BadConsequence.newLevelSpecificTreasures("Pierdes 1 mano visible", 0,[TreasureKind::ONEHAND],nil)
+      prize = Prize.new(3, 1)
+        @unusedMonsters << Monster.new("El mal indecible impronunciable",10,prize,badConsequence)
+        
+      badConsequence =
+        BadConsequence.newLevelNumberOfTreasures("Pierdes tus tesoros visibles. Ja ja ja", 0,5,0)
+      prize = Prize.new(2, 1)
+        @unusedMonsters << Monster.new("Testigos Oculares",6,prize,badConsequence)
+        
+      badConsequence =
+        BadConsequence.newDeath("Hoy no es tu dia de suerte. Mueres",1)
+      prize = Prize.new(2, 5)
+        @unusedMonsters << Monster.new("El gran cthulhu",20,prize,badConsequence)
+        
+      badConsequence =
+        BadConsequence.newLevelNumberOfTreasures("Tu gobierno te recorta 2 niveles", 2,0,0)
+      prize = Prize.new(2, 1)
+        @unusedMonsters << Monster.new("Serpiente Politico",8,prize,badConsequence)
+        
+    
+    #poner lo que pierdes
+        
+      badConsequence =
+        BadConsequence.newLevelSpecificTreasures("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas", 0,[TreasureKind::ONEHAND],nil)
+      prize = Prize.new(1, 1)
+        @unusedMonsters << Monster.new("Felpuggoth",2,prize,badConsequence)
+        
+      badConsequence =
+        BadConsequence.newLevelNumberOfTreasures("Pierdes 2 niveles", 2,0,0)
+      prize = Prize.new(4, 2)
+        @unusedMonsters << Monster.new("Shoggoth",16,prize,badConsequence)
+        
+      badConsequence =
+        BadConsequence.newLevelNumberOfTreasures("Pintalabios negro. Pierdes 2 niveles", 2,0,0)
+      prize = Prize.new(1, 1)
+        @unusedMonsters << Monster.new("Lolitagooth",2,prize,badConsequence)
+
+#            badConsequence = new BadConsequence("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas.",
+#                    0,new ArrayList(Arrays.asList(TreasureKind.HELMET,TreasureKind.ARMOR)),
+#                    new ArrayList(Arrays.asList(TreasureKind.BOTHHANDS,TreasureKind.ONEHAND,TreasureKind.ONEHAND)));
+#            prize = new Prize(1,1);
+#            unusedMonster.add(new Monster("Felpuggoth", 2, badConsequence, prize, +5));    
   end
   
   def shuffleTreasures
