@@ -1,12 +1,14 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-module NapakalakiGame
+require 'singleton'
+class Dice
+  include Singleton
 
-module CombatResult
-    WINGAME = :wingame
-    WIN = :win
-    LOSE = :lose
-    LOSEANDCONVERT = :loseandconvert
+  def nextNumber
+    numero= %w{1 2 3 4 5 6}
+    return rand(numero.length)
+  end
+  
 end
-end
+
