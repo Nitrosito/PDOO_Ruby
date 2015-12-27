@@ -115,7 +115,7 @@ def adjustToFitTreasureLists(v, h)
               end
               @specificVisibleTreasures.each do |specificVisibleTreasure|
                 v.each do |treasure|  
-                  if treasure.type == specificVisibleTreasure
+                  if treasure == specificVisibleTreasure
                     esta = true
                 end
                   if(esta)
@@ -129,7 +129,7 @@ def adjustToFitTreasureLists(v, h)
               end
               @specificHiddenTreasures.each do |specificHiddenTreasure|
                 v.each do |treasure|  
-                  if treasure.type == specificHiddenTreasure
+                  if treasure == specificHiddenTreasure
                     esta = true
                 end
                   if(esta)

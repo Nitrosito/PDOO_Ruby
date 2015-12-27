@@ -5,7 +5,7 @@ module NapakalakiGame
 
 module TreasureKind
     ARMOR = :armor
-    ONEHAND = :onehead
+    ONEHAND = :onehand
     BOTHHANDS = :bothhands
     HELMET = :helmet
     SHOES = :shoes

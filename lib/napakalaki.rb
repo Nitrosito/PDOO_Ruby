@@ -73,7 +73,7 @@ class Napakalaki
     if(aux==CombatResult::LOSEANDCONVERT)
       carta=@dealer.nextCultist()
       jugador = CultistPlayer.new(carta, @currentPlayer)
-      posicionjugador=@players.indexOf(@currentPlayer)  #no se si es asi
+      posicionjugador=@players.index(@currentPlayer)  #no se si es asi
       @currentPlayer=jugador
       @players.set(posicionjugador,jugador)  #no se si es asi
     end
