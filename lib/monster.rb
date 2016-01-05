@@ -12,7 +12,8 @@ class Monster
     @levelChangeAgainstCultistPlayer=lc
   end
   
-  attr_reader :name, :combatLevel,:badconsequence, :levelChangeAgainstCultistPlayer
+  attr_reader :name,:badconsequence, :levelChangeAgainstCultistPlayer
+  attr_writer :combatLevel
   
   
   #por que peta?
@@ -40,6 +41,21 @@ class Monster
   
   def getCombatLevelAgainstCultistPlayer
     return @combatLevel+@levelChangeAgainstCultistPlayer
+  end
+  
+  def combatLevel()
+    dice=Dice.instance
+    r=dice.nextNumber()
+    if(r>5)
+      card=CardDealer.instance
+      friend=card.getRandomUnusedMonster()
+      if(friend !=nil)
+        cl=friend.combatLevel()
+      else
+        cl=0
+      end
+    end
+    return cl
   end
 end
 

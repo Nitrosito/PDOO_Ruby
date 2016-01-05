@@ -255,6 +255,10 @@ class Player
 
   end
   
+  def setHiddenTreasures(lista)
+    @hiddenTreasures=lista
+  end
+  
   protected
   def getOponentLevel(m) 
     return m.combatLevel()

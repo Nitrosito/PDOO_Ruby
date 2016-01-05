@@ -377,5 +377,15 @@ class CardDealer
     @unusedCultist.delete_at(0)
     return res
   end
+  
+  def getRandomUnusedMonster()
+    if (@unusedMonster.size !=0)
+        
+        aleatorio=rand(@unusedMonster.length)
+        aux=@unusedMonster.at(aleatorio)
+        return aux
+    end
+    return nil
+  end
 end
 end
