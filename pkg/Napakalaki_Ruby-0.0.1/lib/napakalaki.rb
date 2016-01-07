@@ -19,7 +19,7 @@ class Napakalaki
     @currentPlayer=nil
     @players=Array.new
     @dealer=CardDealer.instance
-    @currentMonster=nil
+    @currentMonster
   end
   
   attr_reader  :currentPlayer, :currentMonster 
@@ -120,7 +120,7 @@ class Napakalaki
   end
   
   def nextTurn
-    stateOK=nextTurnAllowed()
+    stateOK=nextTurnAllowed() 
     if stateOK
       @currentMonster=@dealer.nextMonster()
       @currentPlayer=nextPlayer()

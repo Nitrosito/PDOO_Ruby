@@ -331,8 +331,10 @@ class CardDealer
   end
   
   def nextMonster
-    if @unusedMonsters.size==0
-      @unusedMonsters=@usedMonsters
+    if @unusedMonsters.empty?
+       @usedMonsters.each do |t|
+                @unusedMonsters << t
+       end
       shuffleMonsters()
       @usedMonsters.clear
     end
