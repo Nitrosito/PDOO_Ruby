@@ -56,9 +56,15 @@ def adjustToFitTreasureLists(v, h)
         nh = @nHiddenTreasures
       end
 
-      bc = numericBC.new(@text,0,nv,nh)
+      bc = NumericBC.new(@text,0,nv,nh)
 
     return bc
+  end
+  
+   def to_s  
+    "#{@text}\n\nNiveles que pierdes: #{@levels}
+    \nNumero de tesoros visibles que pierdes: #{@nVisibleTreasures}
+    \nNumero de tesoros ocultos que pierdes: #{@nHiddenTreasures}\n"   
   end
 end  
   

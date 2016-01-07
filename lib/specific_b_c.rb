@@ -50,7 +50,7 @@ def adjustToFitTreasureLists(v, h)
        tesoros_ocultos = Array.new
        nv = 0
        nh = 0
-       bc = BadConsequence.newLevelNumberOfTreasures(@text,0,nv,nh)
+       bc = SpecificBC(@text,0,nv,nh)
          esta = false
          if @specificVisibleTreasures == nil
            @specificVisibleTreasures = Array.new

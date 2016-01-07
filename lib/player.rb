@@ -9,6 +9,7 @@ require_relative "napakalaki.rb"
 require_relative "prize.rb"
 require_relative "treasure_kind"
 require_relative "numeric_b_c.rb"
+require_relative "specific_b_c"
 require_relative "card_dealer"
 require_relative "combat_result"
 require_relative "death_b_c"
@@ -201,7 +202,7 @@ class Player
   end
   
   def validState()
-    if(@pendingBadConsequence.isEmpty && @hiddenTreasures.size <=4)
+    if((@pendingBadConsequence==nil || @pendingBadConsequence.isEmpty) && @hiddenTreasures.size <=4)
       return true
     end
     return false

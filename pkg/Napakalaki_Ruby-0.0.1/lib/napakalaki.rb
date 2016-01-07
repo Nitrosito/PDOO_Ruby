@@ -72,12 +72,16 @@ class Napakalaki
     aux=@currentPlayer.combat(@currentMonster)
     if(aux==CombatResult::LOSEANDCONVERT)
       carta=@dealer.nextCultist()
-      jugador = CultistPlayer.new(carta, @currentPlayer)
-      posicionjugador=@players.indexOf(@currentPlayer)  #no se si es asi
-      @currentPlayer=jugador
-      @players.set(posicionjugador,jugador)  #no se si es asi
+      jugador = CultistPlayer.new(@currentPlayer, carta )
+      @players.each do |player|
+        if(player.ene == @currentPlayer)
+          player.ene = cultisPlayer
+        end
+      end
+      @players.delete(@currentPlayer)
+      @players << jugador
     end
-    @dealer.giveMonsterBack(@currentMonster)
+        @dealer.giveMonsterBack(@currentMonster)
     return aux
   end
   

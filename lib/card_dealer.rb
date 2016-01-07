@@ -290,7 +290,7 @@ class CardDealer
     sph << [TreasureKind::ONEHAND]
     sph << [TreasureKind::ONEHAND]
       badConsequence =
-        NumericBC.new("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas", 
+        SpecificBC.new("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas", 
         0,spv,sph)
       prize = Prize.new(1, 1)
         @unusedMonsters << Monster.newCultistMonster("Felpuggoth",2,prize,badConsequence,+5)
