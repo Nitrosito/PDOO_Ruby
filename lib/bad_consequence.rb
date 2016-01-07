@@ -13,16 +13,11 @@ class BadConsequence
   
   private_class_method:new 
   
-#  def to_s
-#    "
-      #   Nombre: #{@text}
-      #   Niveles: #{@levels}
-      #   N Tesoros Visibles: #{@nVisibleTreasures}
-      #   N Tesoros Ocultos: #{@nHiddenTreasures}
-      #   Tesoros Visibles Especificos: #{@specificVisibleTreasures}
-      #   Tesoros Ocultos Especificos: #{@specificHiddenTreasures}
-      #   Muerte: #{@death}\n#"
-#  end
+def to_s
+"
+Nombre: #{@text}
+Niveles: #{@levels}"
+end
   
   public
   
@@ -39,7 +34,7 @@ class BadConsequence
   end
   
 def adjustToFitTreasureLists(v, h)
-    raise NotImplementedError.new         
+    raise NotImplementedError.new
 end  
 
 end

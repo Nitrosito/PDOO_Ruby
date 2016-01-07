@@ -32,20 +32,27 @@ class Napakalaki
   
   
   def nextPlayer
-    if(@currentPlayer==nil) 
-      aleatorio = rand(@players.size())
-      @currentPlayer=@players.at(aleatorio)
-      return @players.at(aleatorio)
+    indice=0
+    numeroJugadores=@players.size
+    if (@currentPlayer==nil)
+      indice = rand(numeroJugadores) # 0,1,2
+      theNext=@players[indice]     
+    else 
+      if (@currentPlayer==@players[numeroJugadores-1])
+          theNext=@players[0]
+      else
+          indiceActual=0
+          i=0
+          @players.each do |p|
+            if(p==@currentPlayer)
+              indiceActual=i
+            end
+            i+=1
+          end
+          theNext=@players[indiceActual+1] 
+        end
     end
-    
-    if(@currentPlayer==@players.at(@players.size()-1))
-      @currentPlayer=@players.at(0)
-      return @players.at(0)     
-    end
-    
-    actual = @players.index(@currentPlayer)
-    @currentPlayer=@players.at(actual+1)
-    return @players.at(actual+1);
+        return theNext 
   end
   
   def nextTurnAllowed
@@ -74,8 +81,8 @@ class Napakalaki
       carta=@dealer.nextCultist()
       jugador = CultistPlayer.new(@currentPlayer, carta )
       @players.each do |player|
-        if(player.ene == @currentPlayer)
-          player.ene = cultisPlayer
+        if(player == @currentPlayer)
+          player = jugador
         end
       end
       @players.delete(@currentPlayer)

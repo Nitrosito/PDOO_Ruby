@@ -82,10 +82,10 @@ class Player
   end
   
   def applyBadConsequence(m)
-    badConsequence=m.badconsequence
-    nLevels=badConsequence.levels()
+    badconsequence=m.badconsequence
+    nLevels=badconsequence.levels
     decrementLevels(nLevels)
-    pendingBad=badConsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+    pendingBad=badconsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
       @pendingBadConsequence=pendingBad
   end
   

@@ -3,7 +3,7 @@
 # and open the template in the editor.
 module NapakalakiGame
 class CultistPlayer < Player
-  def initialize(myCultistCard,enemy)
+  def initialize(enemy,myCultistCard)
     super(enemy)
     @totalCultistPlayers =0
     @myCultistCard = myCultistCard
