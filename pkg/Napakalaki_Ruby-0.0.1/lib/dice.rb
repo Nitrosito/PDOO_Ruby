@@ -2,6 +2,7 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require 'singleton'
+module NapakalakiGame
 class Dice
   include Singleton
 
@@ -11,4 +12,4 @@ class Dice
   end
   
 end
-
+end

@@ -1,44 +1,51 @@
 # To change this license header, choose License Headers in Project Properties.
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
-
+require_relative "card_dealer.rb"
+require_relative "bad_consequence.rb"
+require_relative "dice.rb"
+require_relative "treasure.rb"
+require_relative "napakalaki.rb"
+require_relative "prize.rb"
+require_relative "treasure_kind"
+require_relative "numeric_b_c.rb"
+require_relative "card_dealer"
+require_relative "combat_result"
+require_relative "death_b_c"
+module NapakalakiGame
 class Player
-  def initialize(name)
-    @name=name
-    @level=1
-    @dead=true
-    @canISteal=true
-    @enemy=nil
-    @hiddenTreasures=Array.new
-    @visibleTreasures=Array.new
-    @pendingBadConsequence=nil
-    @@MAXLEVEL=10
+  @@MAXLEVEL=10
+  def initialize(namev, level=1,dead=true,canISteal=true,enemy=nil,ht=Array.new,vt=Array.new,pbc=NumericBC.new('', 0, 0, 0))
+    @name=namev
+    @level=level
+    @dead=dead
+    @canISteal=canISteal
+    @enemy=enemy
+    @hiddenTreasures=ht
+    @visibleTreasures=vt
+    @pendingBadConsequence=pbc
+    
   end
   
-  attr_reader :name, :level, :hiddenTreasures, :visibleTreasures, :dead, :canISteal 
-  attr_writer :pendingBadConsequence,:enemy 
+  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures, :pendingBadConsequence, :enemy
+  attr_writer :enemy
+
+  
+  def self.newCopia(p)
+    new(p.name, p.level,p.dead,p.canISteal,p.enemy,p.hiddenTreasures,p.visibleTreasures,p.pendingBadConsequence)
+    
+  end
   
   private
   
-  def canYouGiveMeATreasure()
-    if(@hiddenTreasures.empty?)
-      return false
-    end
-    return true
- end
+
  
   
   def bringToLife()
     @dead=false
   end
   
-def getCombatLevel()
-    suma = 0
-    @visibleTreasures.each do |i|
-      suma = suma+i.bonus
-    end
-    return @level+suma
-  end
+
   
   def incrementLevels(i)
        @level+=i
@@ -46,6 +53,8 @@ def getCombatLevel()
            @level=10;
        end
   end
+  
+  
   
   def haveStolen()
     @canISteal=false
@@ -63,7 +72,7 @@ def getCombatLevel()
     incrementLevels(nLevels)
     nTreasures=m.getTreasuresGained()
     if nTreasures > 0
-      dealer=CardDealer.getInstance()
+      dealer=CardDealer.instance
       for i in 0..nTreasures
         aux=dealer.nextTreasure()
         @hiddenTreasures << aux
@@ -72,64 +81,54 @@ def getCombatLevel()
   end
   
   def applyBadConsequence(m)
-    badConsequence=m.getBadConsequence()
-    nLevels=badConsequence.getLevels()
-    decrementsLevels(nLevels)
+    badConsequence=m.badconsequence
+    nLevels=badConsequence.levels()
+    decrementLevels(nLevels)
     pendingBad=badConsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
-    setPendingBadConsequence(pendingBad)
+      @pendingBadConsequence=pendingBad
   end
   
   def canMakeTreasureVisible(t)
-    if(@visibleTreasures.size()>=4)
-      return false
-    end
+    puedo = false
     
-    unamano=0
-    dosmanos=0
-    cabeza=0
-    zapatos=0
-    armadura=0
-    @visibleTreasures.each do|i|
-          if(@visibleTreasures.at(i).type()==ONEHAND)
-            unamano+=1
-          end
-          
-          if(@visibleTreasures.at(i).type()==BOTHHANDS)
-            dosmanos+=1
-          end 
-          
-          if(@visibleTreasures.at(i).type()==HELMET)
-            cabeza+=1
-          end 
-          
-          if(@visibleTreasures.at(i).type()==SHOES)
-            zapatos+=1
-          end 
-          
-          if(@visibleTreasures.at(i).type()==ARMOR)
-            armadura+=1
-          end 
-   end   
-   
-    if((cabeza == 1 && t.type()==HELMET) ||
-          (zapatos ==1 && t.type()==SHOES) ||
-          (armadura ==1 && t.type()==ARMOR))
-      return false
-    end
+    unamano = 0
+    dosmanos = 0
+    armadura = 0
+    casco = 0
+    zapatos = 0
     
-    if((unamano==1 && t.type() == BOTHHANDS) ||
-          (dosmanos==1 && t.type()==BOTHHANDS)||
-           (unamano==2 && t.type()==ONEHAND))
-      return false
-    end
-    
-    return true;
-end
-
-  
-  def howManyVisibleTreasures(tkind)
     @visibleTreasures.each do |i|
-    n = 0
+      if i.type == TreasureKind::ONEHAND
+        unamano += 1
+      elsif i.type == TreasureKind::BOTHHANDS
+        dosmanos += 1
+      elsif i.type == TreasureKind::ARMOR
+        armadura += 1
+      elsif i.type == TreasureKind::HELMET
+        casco += 1
+      elsif i.type == TreasureKind::SHOES
+        zapatos += 1
+      end
+    end
+    
+      if (t.type == TreasureKind::ONEHAND && unamano < 2 && dosmanos == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::BOTHHANDS && unamano == 0 && dosmanos == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::ARMOR && armadura == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::HELMET && casco == 0)
+        puedo = true
+      elsif (t.type == TreasureKind::SHOES && zapatos == 0)
+        puedo = true
+      end 
+    return puedo
+  end
+
+  #FIXME i , o i.type?
+  def howManyVisibleTreasures(tkind)
+        n = 0
+    @visibleTreasures.each do |i|
       if(tkind == i)
         n += 1
       end
@@ -138,88 +137,97 @@ end
   end
   
   def dielfNoTreasures()
-    if(@hiddenTreasures.empty? && @visibleTreasures.empty?)
-      @dead = true;
+    if(@hiddenTreasures.size==0 && @visibleTreasures.size==0)
+      @dead=true
     end
   end
   
+  ##FIXME
+    public
   def giveMeATreasure()
-    rnd=Rand(@hiddenTreasures.size())
+    rnd=rand(@hiddenTreasures.size())
     aux = @hiddenTreasures.at(rnd)
     @hiddenTreasures.delete_at(rnd)
     return aux
   end
  
-
-  public
   
+    def canYouGiveMeATreasure()
+      return !@hiddenTreasures.empty?
+    end
+ 
   def combat(m)
     myLevel=getCombatLevel()
-    monsterLevel=m.getCombatLevel()
+    monsterLevel=getOponentLevel(m)
     if myLevel>monsterLevel
       applyPrize(m)
-      if(@level >= MAXLEVEL)
-        return WINGAME
+      if(@level >= @@MAXLEVEL)
+        return CombatResult::WINGAME
       else
-        return WIN
+        return CombatResult::WIN
       end
     else
       applyBadConsequence(m)
-      return LOSE
+      if(shouldConvert())
+        return CombatResult::LOSEANDCONVERT
+      end
+      
+      return CombatResult::LOSE
     end
   end
   
   def makeTreasureVisible(t)
     canI=canMakeTreasureVisible(t)
-    if canI
+    if canI==true
       @visibleTreasures << t
-    else
-      @hiddenTreasures.delete_at(t)
+      @hiddenTreasures.delete(t)
     end
   end
   
   def discardVisibleTreasure(t)
-    @visibleTreasures.delete_at(t)
-    if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
+    @visibleTreasures.delete(t)
+    if @pendingBadConsequence!=nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractVisibleTreasure(t)
     end
-    dielNoTreasures()
+    dielfNoTreasures()
   end
   
   def discardHiddenTreasure(t)
-    @hiddenTreasures.delete_at(t)
-    if @pendingBadConsequence==nil && !@pendingBadConsequence.isEmpty()
+    @hiddenTreasures.delete(t)
+    if @pendingBadConsequence!=nil && !@pendingBadConsequence.isEmpty()
       @pendingBadConsequence.substractHiddenTreasure(t)
     end
-    dielNoTreasures()
+    dielfNoTreasures()
   end
   
   def validState()
-    if(@pendingBadConsequence.isEmpty && @hiddenTreasures <=4)
+    if(@pendingBadConsequence.isEmpty && @hiddenTreasures.size <=4)
       return true
     end
     return false
   end
   
-  def initTreasure()
-    dealer=CardDealer.getInstance()
-    dice=Dice.getInstance()
+  def initTreasures()
+    dealer=CardDealer.instance()
+    dice=Dice.instance()
     bringToLife()
-    treasure=dealer.nextNumber()
+    treasure=dealer.nextTreasure()
+    @hiddenTreasures<< treasure
+    number=dice.nextNumber()
     
     if number > 1
       treasure1=dealer.nextTreasure()
-      @hiddenTreasures << treasure1
+      @hiddenTreasures<< treasure1
     end
     
     if number ==6
       treasure1=dealer.nextTreasure()
-      @hiddenTreasures << treasure1
+      @hiddenTreasures<< treasure1
     end
-  end
+  end 
   
   def stealTreasure()
-    canI=canSteal()
+    canI=canISteal
     if canI
       canYou=@enemy.canYouGiveMeATreasure()
       if canYou
@@ -232,15 +240,46 @@ end
     return nil
   end
   
-  def discardAlltreasures()
-    for treasure in @visibleTreasures
-      discardVisibleTreasure(treasure)
+  def discardAllTreasures()
+    @visibleTreasures.each do |i|
+      discardVisibleTreasure(i)
     end
-    for treasure in @hiddenTreasures
-      discardHiddenTreasure(treasure)
+    
+    @hiddenTreasures.each do |i|
+      discardHiddenTreasure(i)
     end
   end
-        
+  
+  def to_s
+
+    "Nombre del jugador: #{@name}
+     Nivel del jugador: #{@level}"
+
+  end
+  
+  protected
+  def getOponentLevel(m) 
+    return m.combatLevel()
+  end
+  
+  def shouldConvert
+    dado=Dice.instance
+      dado1=dado.nextNumber()
+    if(dado1==1)
+      return true
+    end
+    return false
+  end
+  
+  def getCombatLevel()
+    suma = 0
+    @visibleTreasures.each do |i|
+      suma = suma+i.bonus
+    end
+    return @level+suma
+  end
+          
+end
 end
 
 

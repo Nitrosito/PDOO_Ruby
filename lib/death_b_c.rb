@@ -3,10 +3,12 @@
 # and open the template in the editor.
 module NapakalakiGame
 
-module CombatResult
-    WINGAME = :wingame
-    WIN = :win
-    LOSE = :lose
-    LOSEANDCONVERT = :loseandconvert
-end
+class DeathBC < NumericBC
+  def initialize(text,muerte)
+    super(text, 0, @@MAXTREASURES, @@MAXTREASURES);
+    @death=muerte
+  end
+  public_class_method :new
+  attr_reader :death
+  end
 end

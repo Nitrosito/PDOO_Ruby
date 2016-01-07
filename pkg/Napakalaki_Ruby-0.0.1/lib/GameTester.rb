@@ -7,8 +7,9 @@
 #última
 
 require 'singleton'
-require_relative 'napakalaki.rb'
+require_relative 'napakalaki'
 require_relative 'Command'
+
 
 module Test
 
@@ -24,7 +25,7 @@ class GameTester
     @game.initGame(names) 
     
     begin #Mientras dure la partida
-      currentPlayer=@game.getCurrentPlayer()
+      currentPlayer=@game.currentPlayer
       begin #Mientras el jugador se decide a conocer al monstruo
         puts "******* ******* ******* ******* ******* ******* *******"
         puts "\n\n Turno de: " + currentPlayer.to_s() 
@@ -42,7 +43,7 @@ class GameTester
           combatResult = @game.developCombat()
           case combatResult
             when NapakalakiGame::CombatResult::WINGAME then 
-              puts "\n\n       " + currentPlayer.getName()
+              puts "\n\n       " + currentPlayer.name
               puts "\n\n HAS GANADO LA PARTIDA"
               #break está implícito            
             when NapakalakiGame::CombatResult::WIN then
@@ -138,16 +139,16 @@ class GameTester
      
     begin #Se descartan tesoros hasta que se vuelve al menÃº anterior
       if visible then
-        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.getVisibleTreasures(), true)
+        howMany = showTreasures("Elige tesoros visibles para descartar", aPlayer.visibleTreasures, true)
       else 
-        howMany = showTreasures("Elige tesoros ocultos para descartar", aPlayer.getHiddenTreasures(), true)
+        howMany = showTreasures("Elige tesoros ocultos para descartar", aPlayer.hiddenTreasures(), true)
       end
       option = getTreasure (howMany)
       if (option > -1) then 
         if visible then
-          @game.discardVisibleTreasures ([aPlayer.getVisibleTreasures().at(option)])
+          @game.discardVisibleTreasures ([aPlayer.visibleTreasures().at(option)])
         else
-          @game.discardHiddenTreasures ([aPlayer.getHiddenTreasures().at(option)])          
+          @game.discardHiddenTreasures ([aPlayer.hiddenTreasures().at(option)])          
         end
       end
     end while (option != -1)  
@@ -156,10 +157,11 @@ class GameTester
   def manageMakeTreasureVisible (aPlayer)
        
     begin #Se hacen tesoros visibles hasta que se vuelve al menÃº anterior
-      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.getHiddenTreasures(), true)
+              #FIXME @nitrosito: He tenido que cambiar visibleTreasures por hiddenTreasures
+      howMany = showTreasures("Elige tesoros para intentar hacerlos visibles", aPlayer.hiddenTreasures, true)
       option = getTreasure (howMany);
       if (option > -1) then
-        aPlayer.makeTreasureVisible (aPlayer.getHiddenTreasures()[option])
+        aPlayer.makeTreasureVisible (aPlayer.hiddenTreasures()[option])
       end
     end while (option != -1)
   end
@@ -205,15 +207,15 @@ class GameTester
 #        gets
       when  Command::ShowMonster then 
         puts "\n------- ------- ------- ------- ------- ------- ------- "
-        puts "El monstruo actual es:\n\n" + @game.getCurrentMonster().to_s()
+        puts "El monstruo actual es:\n\n" + @game.currentMonster.to_s()
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::ShowVisibleTreasure then
-        showTreasures("Esta es tu lista de tesoros visibles", aPlayer.getVisibleTreasures(), false)
+        showTreasures("Esta es tu lista de tesoros visibles", aPlayer.visibleTreasures(), false)
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::ShowHiddenTreasure then
-        showTreasures("Esta es tu lista de tesoros ocultos", aPlayer.getHiddenTreasures(), false)
+        showTreasures("Esta es tu lista de tesoros ocultos", aPlayer.hiddenTreasures(), false)
 #        puts "pulsa enter para seguir"
 #        gets
       when Command::MakeTreasureVisible then

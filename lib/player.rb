@@ -8,12 +8,14 @@ require_relative "treasure.rb"
 require_relative "napakalaki.rb"
 require_relative "prize.rb"
 require_relative "treasure_kind"
+require_relative "numeric_b_c.rb"
 require_relative "card_dealer"
 require_relative "combat_result"
+require_relative "death_b_c"
 module NapakalakiGame
 class Player
   @@MAXLEVEL=10
-  def initialize(namev, level=1,dead=true,canISteal=true,enemy=nil,ht=Array.new,vt=Array.new,pbc=BadConsequence.newLevelNumberOfTreasures('', 0, 0, 0))
+  def initialize(namev, level=1,dead=true,canISteal=true,enemy=nil,ht=Array.new,vt=Array.new,pbc=NumericBC.new('', 0, 0, 0))
     @name=namev
     @level=level
     @dead=dead
