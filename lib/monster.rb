@@ -12,7 +12,7 @@ class Monster
     @levelChangeAgainstCultistPlayer=lc
   end
   
-  attr_reader :name, :combatLevel,:badconsequence, :levelChangeAgainstCultistPlayer
+  attr_reader :name, :combatLevel, :prize, :badconsequence, :levelChangeAgainstCultistPlayer
   
   
   #por que peta?

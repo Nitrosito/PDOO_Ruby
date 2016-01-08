@@ -28,8 +28,9 @@ class Player
     
   end
   
-  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures, :pendingBadConsequence, :enemy
-  attr_writer :enemy
+  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures
+  attr_accessor :enemy
+  attr_writer :pendingBadConsequence
 
   
   def self.newCopia(p)
@@ -62,7 +63,7 @@ class Player
   end
   
   def decrementLevels(i)
-    @level-=i
+    @level=@level-i
     if(@level<1)
            @level=1
     end
@@ -158,7 +159,7 @@ class Player
     end
  
   def combat(m)
-    myLevel=getCombatLevel()
+    myLevel=getCombatLevel
     monsterLevel=getOponentLevel(m)
     if myLevel>monsterLevel
       applyPrize(m)
@@ -272,7 +273,7 @@ class Player
     return false
   end
   
-  def getCombatLevel()
+  def getCombatLevel
     suma = 0
     @visibleTreasures.each do |i|
       suma = suma+i.bonus

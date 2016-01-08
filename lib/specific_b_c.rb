@@ -21,28 +21,15 @@ end
 
 
 def substractVisibleTreasure(t)
-    esta=false
-    @specificVisibleTreasures.each do |i|
-      if t.type == @specificVisibleTreasures.at(i).type
-        esta=true
-      end
-    end
-    
-    if esta
-      @specificVisibleTreasures.delete(i)
-    end
+  if(@specificVisibleTreasures.include?(t.type))
+    @specificVisibleTreasures.delete(t.type)
+  end
 end
 
 def substractHiddenTreasure(t)
-   esta=false
-    @specificHiddenTreasures.each do |i|
-      if t.getType() == @specificHiddenTreasures.at(i)
-        esta=true
-      end
-    end
-    
-    if esta
-      @specificHiddenTreasures.delete(i)
+  if(@specificHiddenTreasures.include?(t.type))
+    @specificHiddenTreasures.delete(t.type)
+  end
 end
 
 def adjustToFitTreasureLists(v, h)
@@ -50,7 +37,7 @@ def adjustToFitTreasureLists(v, h)
        tesoros_ocultos = Array.new
        nv = 0
        nh = 0
-       bc = SpecificBC(@text,0,nv,nh)
+       bc = SpecificBC.new(@text,0,nv,nh)
          esta = false
          if @specificVisibleTreasures == nil
            @specificVisibleTreasures = Array.new
@@ -80,10 +67,9 @@ def adjustToFitTreasureLists(v, h)
 
            end  
          end
-         bc = specificBC.new(@text,0,tesoros_visibles, tesoros_ocultos)
+         bc = SpecificBC.new(@text,0,tesoros_visibles, tesoros_ocultos)
        return bc
 
     end
  end
-end
 end
