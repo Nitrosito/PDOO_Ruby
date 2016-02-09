@@ -2,6 +2,14 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-module Other
-    
+module NapakalakiGame
+
+class Cultist
+  def initialize(name, gainedLevels)
+    @name=name
+    @gainedLevels=gainedLevels
+  end
+  
+  attr_accessor :gainedLevels
+end
 end

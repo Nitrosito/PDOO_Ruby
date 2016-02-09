@@ -8,12 +8,15 @@ require_relative "treasure.rb"
 require_relative "napakalaki.rb"
 require_relative "prize.rb"
 require_relative "treasure_kind"
+require_relative "numeric_b_c.rb"
+require_relative "specific_b_c"
 require_relative "card_dealer"
 require_relative "combat_result"
+require_relative "death_b_c"
 module NapakalakiGame
 class Player
   @@MAXLEVEL=10
-  def initialize(namev, level=1,dead=true,canISteal=true,enemy=nil,ht=Array.new,vt=Array.new,pbc=BadConsequence.newLevelNumberOfTreasures('', 0, 0, 0))
+  def initialize(namev, level=1,dead=true,canISteal=true,enemy=nil,ht=Array.new,vt=Array.new,pbc=NumericBC.new('', 0, 0, 0))
     @name=namev
     @level=level
     @dead=dead
@@ -25,8 +28,9 @@ class Player
     
   end
   
-  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures, :pendingBadConsequence, :enemy
-  attr_writer :enemy
+  attr_reader :name, :level, :dead, :canISteal, :hiddenTreasures, :visibleTreasures
+  attr_accessor :enemy
+  attr_writer :pendingBadConsequence
 
   
   def self.newCopia(p)
@@ -59,7 +63,7 @@ class Player
   end
   
   def decrementLevels(i)
-    @level-=i
+    @level=@level-i
     if(@level<1)
            @level=1
     end
@@ -79,10 +83,10 @@ class Player
   end
   
   def applyBadConsequence(m)
-    badConsequence=m.badconsequence
-    nLevels=badConsequence.levels()
+    bc=m.badconsequence
+    nLevels=bc.levels
     decrementLevels(nLevels)
-    pendingBad=badConsequence.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
+    pendingBad=bc.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures)
       @pendingBadConsequence=pendingBad
   end
   
@@ -155,7 +159,7 @@ class Player
     end
  
   def combat(m)
-    myLevel=getCombatLevel()
+    myLevel=getCombatLevel
     monsterLevel=getOponentLevel(m)
     if myLevel>monsterLevel
       applyPrize(m)
@@ -199,7 +203,7 @@ class Player
   end
   
   def validState()
-    if(@pendingBadConsequence.isEmpty && @hiddenTreasures.size <=4)
+    if((@pendingBadConsequence==nil || @pendingBadConsequence.isEmpty) && @hiddenTreasures.size <=4)
       return true
     end
     return false
@@ -269,7 +273,7 @@ class Player
     return false
   end
   
-  def getCombatLevel()
+  def getCombatLevel
     suma = 0
     @visibleTreasures.each do |i|
       suma = suma+i.bonus

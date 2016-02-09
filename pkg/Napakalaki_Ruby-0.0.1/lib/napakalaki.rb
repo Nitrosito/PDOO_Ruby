@@ -2,8 +2,16 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require 'singleton'
-require 'card_dealer.rb'
-require 'player.rb'
+require_relative 'card_dealer.rb'
+require_relative'player.rb'
+require_relative 'cultist_player.rb'
+require_relative 'bad_consequence.rb'
+require_relative 'dice.rb'
+require_relative 'combat_result.rb'
+require_relative 'monster.rb'
+require_relative 'treasure.rb'
+require_relative 'treasure_kind.rb'
+module NapakalakiGame
 class Napakalaki
   include Singleton
   
@@ -11,34 +19,45 @@ class Napakalaki
     @currentPlayer=nil
     @players=Array.new
     @dealer=CardDealer.instance
-    @currentMonster=nil
+    @currentMonster
   end
   
   attr_reader  :currentPlayer, :currentMonster 
   
   def initPlayers(names)
     names.each do |i|
-      @players << Player.new(i);
+      @players << Player.new(i)
     end
   end
   
+  
   def nextPlayer
-    if(@currentPlayer==nil) 
-      aleatorio = rand(@players.size())
-      return @players.at(aleatorio)
+    indice=0
+    numeroJugadores=@players.size
+    if (@currentPlayer==nil)
+      indice = rand(numeroJugadores) # 0,1,2
+      theNext=@players[indice]     
+    else 
+      if (@currentPlayer==@players[numeroJugadores-1])
+          theNext=@players[0]
+      else
+          indiceActual=0
+          i=0
+          @players.each do |p|
+            if(p==@currentPlayer)
+              indiceActual=i
+            end
+            i+=1
+          end
+          theNext=@players[indiceActual+1] 
+        end
     end
-    
-    if(@players.index(@currentPlayer)==@players.size()-1)
-      return @players.at(0);      
-    end
-    
-    actual = @players.index(@currentPlayer)
-    return @players.at(actual+1);
+        return theNext 
   end
   
   def nextTurnAllowed
     if(@currentPlayer==nil)
-        return false
+        return true
     end
     
     return @currentPlayer.validState()
@@ -58,52 +77,54 @@ class Napakalaki
   
   def developCombat
     aux=@currentPlayer.combat(@currentMonster)
-    @dealer.giveMonsterBack(@currentMonster)
+    if(aux==CombatResult::LOSEANDCONVERT)
+      carta=@dealer.nextCultist()
+      jugador = CultistPlayer.new(@currentPlayer, carta )
+      @players.each do |player|
+        if(player == @currentPlayer)
+          player = jugador
+        end
+      end
+      @players.delete(@currentPlayer)
+      @players << jugador
+    end
+        @dealer.giveMonsterBack(@currentMonster)
     return aux
   end
   
   def discardVisibleTreasures(treasures)
-    for treasure in treasures
-      @currentPlayer.discardVisibleTreasure(treasure)
-      @dealer.giveTreasureBack(treasure)
+    treasures.each do |i|
+      @currentPlayer.discardVisibleTreasure(i)
+      @dealer.giveTreasureBack(i)
     end
   end
   
   def discardHiddenTreasures(treasures)
-    for treasure in treasures
-      @currentPlayer.discardHiddenTreasure(treasure)
-      @dealer.giveTreasureBack(treasure)
+    treasures.each do |i|
+      @currentPlayer.discardHiddenTreasure(i)
+      @dealer.giveTreasureBack(i)
     end
   end
   
   def makeTreasuresVisible(treasures)
-    for treasure in treasures
-      @currentPlayer.makeTreasureVisible(treasure)
+    treasures.each do |i|
+      @currentPlayer.makeTreasureVisible(i)
     end
   end
   
   def initGame(players)
     self.initPlayers(players)
     self.setEnemies()
-    self.nextTurn()
     @dealer.initCards()
     self.nextTurn()
   end
   
-  def getCurrentPlayer
-    return @currentPlayer
-  end
-  
-  def getCurrentMonster
-    
-  end
-  
   def nextTurn
-    stateOK=nextTurnAllowed()
+    stateOK=nextTurnAllowed() 
     if stateOK
       @currentMonster=@dealer.nextMonster()
       @currentPlayer=nextPlayer()
-      dead=@currentPlayer.isDead()
+      dead=@currentPlayer.dead
       if dead
         @currentPlayer.initTreasures()
       end
@@ -120,4 +141,5 @@ class Napakalaki
   end
   
   
+end
 end
