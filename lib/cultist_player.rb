@@ -3,12 +3,12 @@
 # and open the template in the editor.
 require_relative "player.rb"
 module NapakalakiGame
-class CultistPlayer 
-      @@totalCultistPlayers =0
-      
-  def initialize(player,myCultistCard)
-    Player.newCopia(player)
-    @@totalCultistPlayers++
+class CultistPlayer < Player
+  @@totalCultistPlayer=0
+  
+  def initialize(enemy,myCultistCard)
+    Player.newCopia(enemy)
+    @@totalCultistPlayers = @@totalCultistPlayer +1
     @myCultistCard = myCultistCard
   end
   
