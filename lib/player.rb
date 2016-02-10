@@ -255,7 +255,8 @@ class Player
   def to_s
 
     "Nombre del jugador: #{@name}
-     Nivel del jugador: #{@level}"
+     Nivel del jugador: #{@level}
+     Sectario: No"
 
   end
   
