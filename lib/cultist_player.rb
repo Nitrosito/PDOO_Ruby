@@ -4,11 +4,11 @@
 require_relative "player.rb"
 module NapakalakiGame
 class CultistPlayer < Player
-      @@totalCultistPlayers =0
-      
+  @@totalCultistPlayer=0
+  
   def initialize(enemy,myCultistCard)
-    super(enemy)
-    @@totalCultistPlayers = @@totalCultistPlayers +1
+    Player.newCopia(enemy)
+    @@totalCultistPlayers = @@totalCultistPlayer +1
     @myCultistCard = myCultistCard
   end
   
