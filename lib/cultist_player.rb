@@ -16,7 +16,7 @@ class CultistPlayer
   
   protected 
   def getCombatLevel(m)
-    nvplayer=super.getCombatLevel()  #preguntar si es asi el super
+    nvplayer=super.getCombatLevel()  
     res= ((nvplayer*0.2)+nvplayer)+(m.getLevelsGained() * @totalCultistPlayers)
     return res
   end
@@ -29,7 +29,7 @@ class CultistPlayer
     return false
   end
   
-  private  #estos dos no los se
+  private  
   def giveMeATreasure
     return nil
   end
@@ -38,6 +38,9 @@ class CultistPlayer
     
   end
 
-  
+  def to_s
+    "\Nombre del Jugador sectario: #{@name}
+    \n Nivel del jugador sectario: #{@level}"
+  end
 end
 end
